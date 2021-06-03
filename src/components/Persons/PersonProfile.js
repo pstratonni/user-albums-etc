@@ -19,6 +19,10 @@ const PersonProfile = () => {
   useEffect(() => {
     setPerson(getPersonById(id));
   }, []);
+  
+  useEffect(() => {
+    setPerson(getPersonById(id));
+  }, [id]);
 
   useEffect(() => {
     const div = addAlbum ? document.querySelector(".mod-album") : null;
