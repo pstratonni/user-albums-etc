@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import person from "../data/person";
 import { GlobalContext } from "./App";
 
 const Navigation = () => {
@@ -12,8 +11,8 @@ const Navigation = () => {
   };
 
   const activPersonData = (name) => {
-    const person = getPersonById(activePerson);
-    return person[name];
+    const personProFile = getPersonById(activePerson);
+    return personProFile[name];
   };
 
   return (
