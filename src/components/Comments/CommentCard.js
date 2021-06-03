@@ -7,10 +7,16 @@ const CommentCard = ({ personId, body, getPersonById, dateTime }) => {
   };
   const renderTime = () => {
     const datePart = new Date(dateTime);
-    const date = `${datePart.getHours()}:${datePart.getMinutes()} ${datePart.getDate()}-${datePart.getMonth()}-${datePart.getFullYear()}`;
+    const date = `${datePart.toLocaleDateString("en-DE", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    })}`;
     return date;
   };
-  // datePart.toLocaleDateString('en-DE',{day:''})
+
   return (
     <div className="card-body">
       <h5 className="card-title">{personName(personId)}</h5>

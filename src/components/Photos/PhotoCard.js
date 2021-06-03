@@ -10,23 +10,39 @@ const PhotoCard = ({ photo, personId }) => {
         <img src={photo.src} alt={photo.title} />
         <div className="card-body">
           <p className="card-title">{photo.title}</p>
-            <p className="card-text df">
-              <FontAwesomeIcon
-                icon="thumbs-up"
-                className={activePerson !== personId ?"mx-2 green pointer":'mx-2 green'}
-                onClick={activePerson !== personId ?() => addLike(photo.id, "like"):null}/>
-              <span className="green">{photo.like}</span>
-              <FontAwesomeIcon
-                icon="thumbs-down"
-                className={activePerson !== personId ?"mx-2 red pointer":'mx-2 red'}
-                onClick={activePerson !== personId ?() => addLike(photo.id, "dislike"):null}
-              />
-              <span className="red">{photo.dislike}</span>
-              <FontAwesomeIcon icon={photo.like - photo.dislike<0?'heart-broken':'heart'} className='red mx-2'/>
-              <span className={photo.like - photo.dislike<0?'red':'green'}>{photo.like - photo.dislike}</span>
-            </p>
-          
-          
+          <p className="card-text df">
+            <FontAwesomeIcon
+              icon="thumbs-up"
+              className={`mx-2 green ${
+                activePerson !== personId && activePerson ? " pointer" : ""
+              }`}
+              onClick={
+                activePerson !== personId && activePerson
+                  ? () => addLike(photo.id, "like")
+                  : null
+              }
+            />
+            <span className="green">{photo.like}</span>
+            <FontAwesomeIcon
+              icon="thumbs-down"
+              className={`mx-2 red ${
+                activePerson !== personId && activePerson ? " pointer" : ""
+              }`}
+              onClick={
+                activePerson !== personId && activePerson
+                  ? () => addLike(photo.id, "dislike")
+                  : null
+              }
+            />
+            <span className="red">{photo.dislike}</span>
+            <FontAwesomeIcon
+              icon={photo.like - photo.dislike < 0 ? "heart-broken" : "heart"}
+              className="red mx-2"
+            />
+            <span className={photo.like - photo.dislike < 0 ? "red" : "green"}>
+              {photo.like - photo.dislike}
+            </span>
+          </p>
         </div>
       </div>
     </div>
