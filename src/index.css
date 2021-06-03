@@ -66,6 +66,7 @@ select {
   padding: 10px;
   position: relative;
 }
+
 .off {
   position: absolute;
   top: 15px;
@@ -87,4 +88,7 @@ select {
   box-sizing: border-box;}
 .cur-pointer{
   cursor: pointer;
+}
+.ps{
+  position: static;
 }

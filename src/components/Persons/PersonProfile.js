@@ -37,7 +37,7 @@ const PersonProfile = () => {
     if (!person) return <Loading />;
     return (
       <div className="container">
-        <div className="card w-100">
+        <div className={"card w-100"+isEdit?"ps":''}>
           {isEdit ? renderForm() : null} {renderInfo()}
         </div>
         {renderEditButton()}
@@ -113,7 +113,7 @@ const PersonProfile = () => {
       <div className="mod-form">
         <div className="mod-1-form bg-light">
           <div className="w-100 ">
-            <form onSubmit={submitFormHandle}>
+            <form onSubmit={submitFormHandle} className="my-2">
               <div className="form-group">
                 <label>First Name</label>
                 <input
@@ -211,7 +211,9 @@ const PersonProfile = () => {
         ) : null}
 
         <PersonalAlbum personId={+id} />
-        {addPost ? <AddPost onFinish={addNewPostHandle} setAddPost={setAddPost}/> : null}
+        {addPost ? (
+          <AddPost onFinish={addNewPostHandle} setAddPost={setAddPost} />
+        ) : null}
         <div>
           <PersonalBlog personId={+id} />
         </div>
