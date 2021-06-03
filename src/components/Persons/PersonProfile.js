@@ -37,7 +37,7 @@ const PersonProfile = () => {
     if (!person) return <Loading />;
     return (
       <div className="container">
-        <div className={"card w-100"+isEdit?"ps":''}>
+        <div className={"card w-100"+isEdit?"position-static":''}>
           {isEdit ? renderForm() : null} {renderInfo()}
         </div>
         {renderEditButton()}

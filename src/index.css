@@ -89,6 +89,6 @@ select {
 .cur-pointer{
   cursor: pointer;
 }
-.ps{
+.position-static{
   position: static;
 }

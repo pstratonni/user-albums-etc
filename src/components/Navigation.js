@@ -34,9 +34,10 @@ const Navigation = () => {
 
         <select
           onChange={changeSelectValue}
-          defaultValue={activePerson}
+          defaultValue={activePerson||null}
           className="br-1"
         >
+          <option>Choose a person</option>
           {persons.map((person) => (
             <option key={person.id} value={person.id}>
               {person.fName} {person.lName}

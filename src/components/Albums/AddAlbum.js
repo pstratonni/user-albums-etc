@@ -24,7 +24,7 @@ const AddAlbum = ({ onFinish, setAddAlbum }) => {
     <div className="mod-album">
       <div className="mod-1-album bg-light">
         <form onSubmit={onSubmit}>
-          <div className="form-group mb-2">
+          <div className="form-group my-2">
             <label>Title</label>
             <input
               type="text"
