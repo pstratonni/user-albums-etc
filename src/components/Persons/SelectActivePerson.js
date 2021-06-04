@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { connect } from "react-redux";
-import { CHANGE_ACTIVE_PERSON, FETCH_PERSONS } from "../../store/typesList";
+import { CHANGE_ACTIVE_PERSON, FETCH_PERSONS } from "../../store/typeList";
 import { NavLink } from "react-router-dom";
 import personInitial, {
   activePersonId,
@@ -14,6 +14,7 @@ const SelectActivePerson = ({
   getPersonsObj,
   changeActivePerson,
 }) => {
+  const {getPersonById}=useContext(GlobalContext)
   useEffect(() => {
     const obj = {
       list: personInitial,
@@ -27,14 +28,14 @@ const SelectActivePerson = ({
     setActivePersonIdToStorage(+event.target.value);
   };
 
-  //   const activPersonData = (name) => {
-  //     const personProFile = getPersonById(activePerson);
-  //     return personProFile[name];
-  //   };
+    const activPersonData = (name) => {
+      const personProFile = getPersonById(activePerson);
+      return personProFile[name];
+    };
 
   return persons.length ? (
     <div className="dflex">
-      {/* <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item">
           {activePerson ? (
             <NavLink exact={true} to={`/persons/${activePerson}`}>
@@ -47,7 +48,7 @@ const SelectActivePerson = ({
             </NavLink>
           ) : null}
         </li>
-      </ul> */}
+      </ul>
       <form className="my-auto">
         <select
           onChange={changeSelectValue}

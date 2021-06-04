@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import App from "./components/App";
-import { store } from "../store/store";
+import { store } from "./store/store";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faThumbsUp,

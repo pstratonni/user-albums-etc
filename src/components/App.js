@@ -106,7 +106,7 @@ const App = () => {
         // persons,
         changeActivePerson,
         // activePerson,
-        // getPersonById,
+        getPersonById,
         editPerson,
         albums,
         addNewAlbum,
