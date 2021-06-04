@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../App";
+import {connect} from 'react-redux'
 
-const AddComment = ({ postId }) => {
-  const { activePerson, addNewComments } = useContext(GlobalContext);
+const AddComment = ({ postId,activePerson }) => {
+  const { addNewComments } = useContext(GlobalContext);
   const [comment, setComment] = useState({
+    id:'',
     postId,
     personId: "",
     body: "",
@@ -66,4 +68,9 @@ const AddComment = ({ postId }) => {
 
   return <div>{renderButtons()}</div>;
 };
-export default AddComment;
+const mapStateToProps=state=>{
+  return{
+    activePerson:state.persons.activePerson
+  }
+}
+export default connect(mapStateToProps,null)(AddComment);

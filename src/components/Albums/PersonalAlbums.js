@@ -2,9 +2,10 @@ import React, { useContext,  } from "react";
 import { GlobalContext } from "../App";
 import AddPhoto from '../Photos/AddPhotos'
 import PhotoCard from '../Photos/PhotoCard'
+import {connect} from 'react-redux'
 
-const PersonalAlbum = ({ personId }) => {
-  const { albums, photos, addNewPhoto, activePerson } =
+const PersonalAlbum = ({ personId, activePerson }) => {
+  const { albums, photos, addNewPhoto  } =
     useContext(GlobalContext);
 
   const renderAlbum = () => {
@@ -35,4 +36,9 @@ const PersonalAlbum = ({ personId }) => {
   };
   return renderAlbum();
 };
-export default PersonalAlbum;
+const mapStateToProps=state=>{
+  return{
+    activePerson:state.persons.activePerson
+  }
+}
+export default connect(mapStateToProps,null)(PersonalAlbum);

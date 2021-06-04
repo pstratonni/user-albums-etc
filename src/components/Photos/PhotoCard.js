@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "../App";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {connect} from 'react-redux'
 
-const PhotoCard = ({ photo, personId }) => {
-  const { activePerson, addLike } = useContext(GlobalContext);
+const PhotoCard = ({ photo, personId,activePerson }) => {
+  const {  addLike } = useContext(GlobalContext);
   return (
     <div className="col-6 col-sm-4 col-md-3">
       <div className="card my-2">
@@ -48,4 +49,9 @@ const PhotoCard = ({ photo, personId }) => {
     </div>
   );
 };
-export default PhotoCard;
+const mapStateToProps = (state) => {
+  return {
+    activePerson: state.persons.activePerson,
+  };
+};
+export default connect(mapStateToProps,null) (PhotoCard);

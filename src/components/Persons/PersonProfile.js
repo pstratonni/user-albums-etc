@@ -6,10 +6,11 @@ import AddAlbum from "../Albums/AddAlbum";
 import PersonalAlbum from "../Albums/PersonalAlbums";
 import AddPost from "../Posts/AddPost";
 import PersonalBlog from "../Posts/PersonalBlog";
+import {connect} from 'react-redux'
 
-const PersonProfile = () => {
+const PersonProfile = ({activePerson}) => {
   const { id } = useParams();
-  const { activePerson, getPersonById, editPerson, addNewAlbum, addNewPost } =
+  const { getPersonById, editPerson, addNewAlbum, addNewPost } =
     useContext(GlobalContext);
   const [person, setPerson] = useState(null);
   const [isEdit, setIsEdit] = useState(false);
@@ -244,4 +245,9 @@ const PersonProfile = () => {
     </section>
   );
 };
-export default PersonProfile;
+const mapStateToProps=state=>{
+  return{
+    activePerson:state.persons.activePerson
+  }
+}
+export default connect(mapStateToProps,null) (PersonProfile);

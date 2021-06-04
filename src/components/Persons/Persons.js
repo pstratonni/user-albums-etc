@@ -2,9 +2,9 @@ import React, {useContext} from 'react'
 import {GlobalContext} from '../App'
 import Loading from '../Home/Loading'
 import PersonCard from './PersonCard'
-
-const Persons=()=>{
-    const {persons}=useContext(GlobalContext)
+import { connect } from "react-redux";
+const Persons=({persons})=>{
+    
 
     const renderPersons=()=>{
         if(!persons.length)return(<Loading>Add new Persons</Loading>)
@@ -20,4 +20,10 @@ const Persons=()=>{
     </section>
     )
 }
-export default Persons
+
+const mapStateToProps=state=>{
+    return {
+        persons:state.persons.list
+    }
+}
+export default connect(mapStateToProps,null) (Persons)
