@@ -10,15 +10,7 @@ import commentsInitial, { setCommentsToStorage } from "../data/comments";
 import Navigation from "./Navigation";
 import Pages from "../Layouts/Pages";
 import sortPerson from "../function/sortArray";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-  faThumbsUp,
-  faThumbsDown,
-  faHeart,
-  faHeartBroken,
-} from "@fortawesome/free-solid-svg-icons";
 
-library.add(faThumbsUp, faThumbsDown, faHeart, faHeartBroken);
 export const GlobalContext = React.createContext();
 
 const App = () => {
@@ -110,11 +102,11 @@ const App = () => {
   return (
     <GlobalContext.Provider
       value={{
-        addPerson,
-        persons,
+        // addPerson,
+        // persons,
         changeActivePerson,
-        activePerson,
-        getPersonById,
+        // activePerson,
+        // getPersonById,
         editPerson,
         albums,
         addNewAlbum,

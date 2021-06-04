@@ -1,14 +1,11 @@
-import React, { useContext, useState, useEffect } from "react";
-import { GlobalContext } from "../App";
+import React, { useState } from "react";
+import { connect } from "react-redux";
 
-const AddAlbum = ({ onFinish, setAddAlbum }) => {
-  const { activePerson } = useContext(GlobalContext);
+const AddAlbum = ({ onFinish, setAddAlbum, activePerson }) => {
   const [formData, setFormData] = useState({
     personId: activePerson,
     title: "",
   });
-
-  
 
   const changeHandle = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -18,7 +15,6 @@ const AddAlbum = ({ onFinish, setAddAlbum }) => {
     event.preventDefault();
     onFinish(formData);
   };
-
 
   return (
     <div className="mod-album">
@@ -39,11 +35,16 @@ const AddAlbum = ({ onFinish, setAddAlbum }) => {
             </button>
           </div>
         </form>
-        <div className="off" onClick={()=>setAddAlbum(false)}>
+        <div className="off" onClick={() => setAddAlbum(false)}>
           <p>X</p>
         </div>
       </div>
     </div>
   );
 };
-export default AddAlbum;
+const mapStateToProps = (state) => {
+  return {
+    activePerson: state.persons.activePerson,
+  };
+};
+export default connect(mapStateToProps)(AddAlbum);
