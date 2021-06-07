@@ -2,9 +2,10 @@ import React, {useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {ADD_NEW_PERSON} from "../../store/typeList";
+import {addNewPerson} from '../../store/action/persons'
 
 
-const AddNewPerson=({addNewPerson})=>{
+const AddNewPerson=({addPerson})=>{
 const [formData, setFormData]=useState({
     fName: '',
     lName: '',
@@ -24,7 +25,7 @@ const changeFieldHandle=event=>{
 const submitHandle=event=>{
     event.preventDefault();
     if( !formData.fName.trim()||!formData.lName.trim())return 
-    addNewPerson(formData)
+    addPerson(formData)
     history.push('/persons')
 }
 
@@ -67,7 +68,7 @@ return (
 }
 const mapDipatchToProps=dispatch=>{
     return{
-        addNewPerson:person=>dispatch({type:ADD_NEW_PERSON, payload:person})
+        addPerson:person=>dispatch(addNewPerson(person))
     }
 }
 export default connect(null,mapDipatchToProps)(AddNewPerson)

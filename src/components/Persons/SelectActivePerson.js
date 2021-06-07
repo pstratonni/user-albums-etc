@@ -1,12 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { connect } from "react-redux";
-import { CHANGE_ACTIVE_PERSON, FETCH_PERSONS } from "../../store/typeList";
+
 import { NavLink } from "react-router-dom";
-import personInitial, {
-  activePersonId,
-  setActivePersonIdToStorage,
-} from "../../data/person";
+
 import { GlobalContext } from "../App";
+import {changeActivePersonId, getPerson} from '../../store/action/persons'
 
 const SelectActivePerson = ({
   persons,
@@ -16,16 +14,15 @@ const SelectActivePerson = ({
 }) => {
   const {getPersonById}=useContext(GlobalContext)
   useEffect(() => {
-    const obj = {
-      list: personInitial,
-      activePerson: +activePersonId,
-    };
-    getPersonsObj(obj);
+    getPersonsObj();
   }, []);
+  useEffect(() => {
+     getPersonsObj();
+   }, [persons.length]);
 
   const changeSelectValue = (event) => {
     changeActivePerson(+event.target.value);
-    setActivePersonIdToStorage(+event.target.value);
+    
   };
 
     const activPersonData = (name) => {
@@ -76,10 +73,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getPersonsObj: (personsObject) =>
-      dispatch({ type: FETCH_PERSONS, payload: personsObject }),
+    getPersonsObj: () =>
+      dispatch(getPerson()),
     changeActivePerson: (newId) =>
-      dispatch({ type: CHANGE_ACTIVE_PERSON, payload: newId }),
+      dispatch(changeActivePersonId(newId)),
   };
 };
 

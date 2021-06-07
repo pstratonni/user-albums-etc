@@ -47,7 +47,7 @@ select {
 .pointer{
   cursor: pointer;
 }
-.mod,.mod-album,.mod-form{
+.mod,.mod-album,.mod-form,.mod-delete{
   min-height: 100vh;
   width: 100%;
   position: absolute;
@@ -58,7 +58,7 @@ select {
   left: -0px;
   margin: 0;
 }
-.mod-1,.mod-1-album,.mod-1-form{
+.mod-1,.mod-1-album,.mod-1-form,.mod-1-delete{
   border: solid 1px black;
   border-radius: 5px;
   width: 30%;

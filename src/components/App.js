@@ -15,19 +15,17 @@ export const GlobalContext = React.createContext();
 
 const App = () => {
   const [persons, setPerson] = useState(personInitial);
-  const [activePerson, setActivePerson] = useState(+activePersonId);
+
 
   const addPerson = (person) => {
     const newPerson = [...persons, { ...person, id: Date.now() }];
     setPerson(sortPerson(newPerson));
   };
 
-  const changeActivePerson = (id) => {
-    setActivePerson(id);
-    setActivePersonIdToStorage(id);
-  };
+ 
 
   const getPersonById = (id) => {
+    setPerson(personInitial)
     const idx = persons.findIndex((person) => person.id === +id);
     if (idx === -1) return null;
     return persons[idx];
@@ -104,7 +102,7 @@ const App = () => {
       value={{
         // addPerson,
         // persons,
-        changeActivePerson,
+        // changeActivePerson,
         // activePerson,
         getPersonById,
         editPerson,

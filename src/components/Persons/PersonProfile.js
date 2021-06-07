@@ -6,21 +6,30 @@ import AddAlbum from "../Albums/AddAlbum";
 import PersonalAlbum from "../Albums/PersonalAlbums";
 import AddPost from "../Posts/AddPost";
 import PersonalBlog from "../Posts/PersonalBlog";
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
+import { deletePerson, editPerson } from "../../store/action/persons";
+import { CHANGE_DELETE, CHANGE_EDIT } from "../../store/typeList";
 
-const PersonProfile = ({activePerson}) => {
+const PersonProfile = ({
+  activePerson,
+  isEdit,
+  editElement,
+  changeIsEdit,
+  personDelete,
+  changeDelete,
+  deleteElement,
+}) => {
   const { id } = useParams();
-  const { getPersonById, editPerson, addNewAlbum, addNewPost } =
-    useContext(GlobalContext);
+  const { getPersonById, addNewAlbum, addNewPost } = useContext(GlobalContext);
   const [person, setPerson] = useState(null);
-  const [isEdit, setIsEdit] = useState(false);
   const [addAlbum, setAddAlbum] = useState(false);
   const [addPost, setAddPost] = useState(false);
+  // const [personDelete, setPersonDelete] = useState(false);
 
   useEffect(() => {
     setPerson(getPersonById(id));
   }, []);
-  
+
   useEffect(() => {
     setPerson(getPersonById(id));
   }, [id]);
@@ -34,16 +43,23 @@ const PersonProfile = ({activePerson}) => {
     if (div1) {
       div1.style.top = `${document.documentElement.scrollTop}px`;
     }
+    const divDelete = personDelete
+      ? document.querySelector(".mod-delete")
+      : null;
+    if (divDelete) {
+      divDelete.style.top = `${document.documentElement.scrollTop}px`;
+    }
     const body = document.querySelector("body");
     body.style.overflow = addAlbum || isEdit ? "hidden" : "auto";
-  }, [addAlbum, isEdit]);
+  }, [addAlbum, isEdit, personDelete]);
 
   const renderProfile = () => {
     if (!person) return <Loading />;
     return (
       <div className="container">
-        <div className={"card w-100"+isEdit?"position-static":''}>
+        <div className={"card w-100" + isEdit ? "position-static" : ""}>
           {isEdit ? renderForm() : null} {renderInfo()}
+          {personDelete ? renderFormDelete() : null}
         </div>
         {renderEditButton()}
       </div>
@@ -75,12 +91,16 @@ const PersonProfile = ({activePerson}) => {
   const renderEditButton = () => {
     if (activePerson !== person.id || isEdit || addPost) return null;
     return (
-      <div className="w-100">
+      <div className="row">
         <button
           onClick={editButtonHandle}
-          className="w-100 btn btn-success my-2"
+          className="col-6 btn btn-success my-2"
         >
           Edit
+        </button>
+        <button onClick={deleteHandle} className="col-6 btn btn-danger my-2">
+          {" "}
+          Delete me
         </button>
         <button
           onClick={addAlbumButtonHandel}
@@ -100,7 +120,7 @@ const PersonProfile = ({activePerson}) => {
 
   const editButtonHandle = (event) => {
     event.preventDefault();
-    setIsEdit(true);
+    changeIsEdit();
   };
 
   const addAlbumButtonHandel = (event) => {
@@ -111,6 +131,11 @@ const PersonProfile = ({activePerson}) => {
   const addPostButtonHandle = (event) => {
     event.preventDefault();
     setAddPost(true);
+  };
+
+  const deleteHandle = (event) => {
+    event.preventDefault();
+    changeDelete();
   };
 
   const renderForm = () => {
@@ -186,7 +211,31 @@ const PersonProfile = ({activePerson}) => {
               </div>
             </form>
           </div>
-          <div className="off" onClick={() => setIsEdit(false)}>
+          <div className="off" onClick={() => changeIsEdit(false)}>
+            <p>X</p>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const deletePersonHandle = (event) => {
+    event.preventDefault();
+    deleteElement(person.id);
+    changeDelete();
+  };
+
+  const renderFormDelete = () => {
+    return (
+      <div className="mod-delete">
+        <div className="mod-1-delete bg-light">
+          <h3 className="mt-3">
+            Delete ProFile {person.fName + " " + person.lName}
+          </h3>
+          <a href="#" onClick={deletePersonHandle} className="btn btn-danger">
+            Delete me
+          </a>
+          <div className="off" onClick={() => changeDelete()}>
             <p>X</p>
           </div>
         </div>
@@ -200,8 +249,8 @@ const PersonProfile = ({activePerson}) => {
 
   const submitFormHandle = (event) => {
     event.preventDefault();
-    editPerson(person);
-    setIsEdit(false);
+    editElement(person);
+    changeIsEdit();
   };
 
   const renderPersonInfo = () => {
@@ -245,9 +294,22 @@ const PersonProfile = ({activePerson}) => {
     </section>
   );
 };
-const mapStateToProps=state=>{
-  return{
-    activePerson:state.persons.activePerson
-  }
-}
-export default connect(mapStateToProps,null) (PersonProfile);
+
+const mapStateToProps = (state) => {
+  return {
+    activePerson: state.persons.activePerson,
+    isEdit: state.persons.isEdit,
+    personDelete: state.persons.personDelete,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteElement: (personId) => dispatch(deletePerson(personId)),
+    editElement: (data) => dispatch(editPerson(data)),
+    changeIsEdit: () => dispatch({ type: CHANGE_EDIT, payload: "" }),
+    changeDelete: () => dispatch({ type: CHANGE_DELETE, payload: "" }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PersonProfile);
