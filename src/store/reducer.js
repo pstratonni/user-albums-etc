@@ -58,9 +58,8 @@ export const reducer = (state = stateInit, action) => {
         persons: { ...state.persons, list: _arrEdit, isEdit: false },
       };
     case CHANGE_EDIT:
-      const edit=!state.persons.isEdit
       return{
-        ...state,persons:{...state.persons,isEdit:edit}
+        ...state,persons:{...state.persons,isEdit:!state.persons.isEdit}
       }
       case CHANGE_DELETE:
       const deleteP=!state.persons.personDelete

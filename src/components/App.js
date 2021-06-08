@@ -100,12 +100,7 @@ const App = () => {
   return (
     <GlobalContext.Provider
       value={{
-        // addPerson,
-        // persons,
-        // changeActivePerson,
-        // activePerson,
         getPersonById,
-        editPerson,
         albums,
         addNewAlbum,
         photos,
