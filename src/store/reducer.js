@@ -1,4 +1,3 @@
-
 import {
   ADD_NEW_PERSON,
   FETCH_PERSONS,
@@ -14,7 +13,7 @@ const stateInit = {
     list: [],
     activePerson: null,
     isEdit: false,
-    personDelete:false
+    personDelete: false,
   },
 };
 
@@ -44,7 +43,12 @@ export const reducer = (state = stateInit, action) => {
       _arrDelete.splice(idxDelete, 1);
       return {
         ...state,
-        persons: { ...state.persons, list: _arrDelete, activePerson: null },
+        persons: {
+          ...state.persons,
+          list: _arrDelete,
+          activePerson: null,
+          personDelete: false,
+        },
       };
     case EDIT_PERSON:
       const idxEdit = state.persons.list.findIndex(
@@ -58,14 +62,16 @@ export const reducer = (state = stateInit, action) => {
         persons: { ...state.persons, list: _arrEdit, isEdit: false },
       };
     case CHANGE_EDIT:
-      return{
-        ...state,persons:{...state.persons,isEdit:!state.persons.isEdit}
-      }
-      case CHANGE_DELETE:
-      const deleteP=!state.persons.personDelete
-      return{
-        ...state,persons:{...state.persons,personDelete:deleteP}
-      }
+      return {
+        ...state,
+        persons: { ...state.persons, isEdit: !state.persons.isEdit },
+      };
+    case CHANGE_DELETE:
+      const deleteP = !state.persons.personDelete;
+      return {
+        ...state,
+        persons: { ...state.persons, personDelete: deleteP },
+      };
     default:
       return state;
   }
