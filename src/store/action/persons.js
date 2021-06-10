@@ -4,6 +4,7 @@ import {
   DELETE_PERSON,
   FETCH_PERSONS,
   EDIT_PERSON,
+  SET_PERSON_BY_ID,
 } from "../typeList";
 import personsInitial, {
   activePersonId,
@@ -102,11 +103,22 @@ const editPersonToState = (data) => {
   };
 };
 
-export const getPersonById=personId=>{
-    return {
-        
+export const setPersonById = (personId) => {
+  return (dispatch) => {
+    try {
+      dispatch(setPersonByIdInState(personId));
+    } catch (e) {
+      console.log(e.message);
     }
-}
+  };
+};
+
+const setPersonByIdInState = (personId) => {
+  return {
+    type: SET_PERSON_BY_ID,
+    payload: personId,
+  };
+};
 
 // Server emulation
 const getObj = () => {

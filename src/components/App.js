@@ -1,27 +1,23 @@
-import React, { useState } from "react";
-import personInitial, {
-  activePersonId,
-  setActivePersonIdToStorage,
-} from "../data/person";
+import React, { useEffect, useState } from "react";
+import personInitial from "../data/person";
 import albumInitial, { setAlbumsToStorage } from "../data/album";
 import photosInitial, { setPhotosToStorage } from "../data/photos";
 import postsInitial, { setPostsToStorage } from "../data/posts";
 import commentsInitial, { setCommentsToStorage } from "../data/comments";
 import Navigation from "./Navigation";
 import Pages from "../Layouts/Pages";
-import sortPerson from "../function/sortArray";
+import { connect } from "react-redux";
+import { getPost } from "../store/action/posts";
 
 export const GlobalContext = React.createContext();
 
-const App = () => {
+const App = ({initPost}) => {
+
+  useEffect(()=>{
+    initPost()
+  },[])
+
   const [persons, setPerson] = useState(personInitial);
-
-
-  const addPerson = (person) => {
-    const newPerson = [...persons, { ...person, id: Date.now() }];
-    setPerson(sortPerson(newPerson));
-  };
-
  
 
   const getPersonById = (id) => {
@@ -29,14 +25,6 @@ const App = () => {
     const idx = persons.findIndex((person) => person.id === +id);
     if (idx === -1) return null;
     return persons[idx];
-  };
-
-  const editPerson = (person) => {
-    const editPersons = [...persons];
-    const idx = editPersons.findIndex((p) => p.id === person.id);
-    if (idx === -1) return null;
-    editPersons.splice(idx, 1, person);
-    setPerson(sortPerson(editPersons));
   };
 
   const [albums, setAlbum] = useState(albumInitial);
@@ -118,4 +106,10 @@ const App = () => {
     </GlobalContext.Provider>
   );
 };
-export default App;
+
+const mapDispatchToProps=dispatch=>{
+  return{
+    initPost:()=>dispatch(getPost())
+  }
+}
+export default connect(null,mapDispatchToProps) (App);

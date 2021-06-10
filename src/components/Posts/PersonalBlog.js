@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 import { GlobalContext } from "../App";
 import AddComment from "../Comments/AddComent";
 import CommentCard from "../Comments/CommentCard";
+import {connect} from 'react-redux'
 
-const PersonalBlog = ({ personId }) => {
-  const { posts, comments, getPersonById } = useContext(GlobalContext);
+const PersonalBlog = ({ personId,posts }) => {
+  const { comments, getPersonById } = useContext(GlobalContext);
 
   const renderBlog = () => {
     const personalPost = posts.filter((item) => item.personId === personId);
@@ -50,4 +51,10 @@ const PersonalBlog = ({ personId }) => {
 
   return <div className="my-2">{renderBlog()}</div>;
 };
-export default PersonalBlog;
+
+const mapStateToProps=state=>{
+  return{
+    posts:state.posts.list
+  }
+}
+export default connect(mapStateToProps,null) (PersonalBlog);

@@ -7,32 +7,33 @@ import PersonalAlbum from "../Albums/PersonalAlbums";
 import AddPost from "../Posts/AddPost";
 import PersonalBlog from "../Posts/PersonalBlog";
 import { connect } from "react-redux";
-import { deletePerson, editPerson } from "../../store/action/persons";
+import { deletePerson,  setPersonById } from "../../store/action/persons";
 import { CHANGE_DELETE, CHANGE_EDIT } from "../../store/typeList";
+import EditPersonForm from "./EditPersonForm";
 
 const PersonProfile = ({
   activePerson,
   isEdit,
-  editElement,
   changeIsEdit,
   personDelete,
   changeDelete,
   deleteElement,
+  person,
+  setLocalPerson,
 }) => {
   const { id } = useParams();
-  const { getPersonById, addNewAlbum, addNewPost } = useContext(GlobalContext);
-  const [person, setPerson] = useState(null);
+  const {  addNewAlbum, addNewPost } = useContext(GlobalContext)
   const [addAlbum, setAddAlbum] = useState(false);
   const [addPost, setAddPost] = useState(false);
-  // const [personDelete, setPersonDelete] = useState(false);
+ 
 
   useEffect(() => {
-    setPerson(getPersonById(id));
+   setLocalPerson(+id)
   }, []);
 
   useEffect(() => {
-    setPerson(getPersonById(id));
-  }, [id]);
+    setLocalPerson(+id)
+  }, [id,isEdit]);
 
   useEffect(() => {
     const div = addAlbum ? document.querySelector(".mod-album") : null;
@@ -99,7 +100,7 @@ const PersonProfile = ({
           Edit
         </button>
         <button onClick={deleteHandle} className="col-6 btn btn-danger my-2">
-          {" "}
+         
           Delete me
         </button>
         <button
@@ -138,91 +139,15 @@ const PersonProfile = ({
     changeDelete();
   };
 
-  const renderForm = () => {
-    return (
-      <div className="mod-form">
-        <div className="mod-1-form bg-light">
-          <div className="w-100 ">
-            <form onSubmit={submitFormHandle} className="my-2">
-              <div className="form-group">
-                <label>First Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={person.fName}
-                  name="fName"
-                  onChange={changeFieldHandle}
-                />
-              </div>
-              <div className="form-group">
-                <label>Last Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={person.lName}
-                  name="lName"
-                  onChange={changeFieldHandle}
-                />
-              </div>
-              <div className="form-group">
-                <label>Age</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={person.age}
-                  name="age"
-                  onChange={changeFieldHandle}
-                />
-              </div>
-              <div className="form-group">
-                <label>Email</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={person.email}
-                  name="email"
-                  onChange={changeFieldHandle}
-                />
-              </div>
-              <div className="form-group">
-                <label>Phone</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={person.phone}
-                  name="phone"
-                  onChange={changeFieldHandle}
-                />
-              </div>
-              <div className="form-group mb-2">
-                <label>Avatar</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={person.avatar}
-                  name="avatar"
-                  onChange={changeFieldHandle}
-                />
-              </div>
-              <div className="form-group">
-                <button type="submit" className="btn btn-danger w-100">
-                  Save Changes
-                </button>
-              </div>
-            </form>
-          </div>
-          <div className="off" onClick={() => changeIsEdit(false)}>
-            <p>X</p>
-          </div>
-        </div>
-      </div>
-    );
-  };
+const renderForm=()=>{
+  return(
+    <EditPersonForm person={person}/>
+  )
+}
 
   const deletePersonHandle = (event) => {
     event.preventDefault();
     deleteElement(person.id);
-    changeDelete();
   };
 
   const renderFormDelete = () => {
@@ -243,16 +168,6 @@ const PersonProfile = ({
     );
   };
 
-  const changeFieldHandle = (event) => {
-    setPerson({ ...person, [event.target.name]: event.target.value });
-  };
-
-  const submitFormHandle = (event) => {
-    event.preventDefault();
-    editElement(person);
-    changeIsEdit();
-  };
-
   const renderPersonInfo = () => {
     return (
       <Fragment>
@@ -263,7 +178,6 @@ const PersonProfile = ({
             addAlbum={addAlbum}
           />
         ) : null}
-
         <PersonalAlbum personId={+id} />
         {addPost ? (
           <AddPost onFinish={addNewPostHandle} setAddPost={setAddPost} />
@@ -300,15 +214,17 @@ const mapStateToProps = (state) => {
     activePerson: state.persons.activePerson,
     isEdit: state.persons.isEdit,
     personDelete: state.persons.personDelete,
+    person:state.persons.personById
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteElement: (personId) => dispatch(deletePerson(personId)),
-    editElement: (data) => dispatch(editPerson(data)),
-    changeIsEdit: () => dispatch({ type: CHANGE_EDIT, payload: "" }),
-    changeDelete: () => dispatch({ type: CHANGE_DELETE, payload: "" }),
+    
+    changeIsEdit: () => dispatch({ type: CHANGE_EDIT}),
+    changeDelete: () => dispatch({ type: CHANGE_DELETE}),
+    setLocalPerson: id=>dispatch(setPersonById(id))
   };
 };
 

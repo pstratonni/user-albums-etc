@@ -4,7 +4,7 @@ const CommentCard = ({ personId, body, getPersonById, dateTime }) => {
   const personName = (id) => {
     const person = getPersonById(id);
     if(person)return person.lName + " " + person.fName[0];
-    return(<h5>Deleted Person</h5>)
+    return 'Deleted Person'
   };
   const renderTime = () => {
     const datePart = new Date(dateTime);

@@ -1,74 +1,56 @@
-import React, {useState} from 'react'
-import {useHistory} from 'react-router-dom'
+import React from "react";
+import { useHistory } from "react-router-dom";
+import { useForm } from "react-cool-form";
+import { addNewPerson } from "../../store/action/persons";
+import InputField from "../FormComponents/InputField";
 import {connect} from 'react-redux'
-import {ADD_NEW_PERSON} from "../../store/typeList";
-import {addNewPerson} from '../../store/action/persons'
 
+const AddNewPerson = ({ addPerson }) => {
 
-const AddNewPerson=({addPerson})=>{
-const [formData, setFormData]=useState({
-    fName: '',
-    lName: '',
-    age: '',
-    email: '',
-    phone: '',
-    avatar: ''
-})
+  let history = useHistory();
 
+  const { form, use } = useForm({
+    defaultValues: {
+      fName: "",
+      lName: "",
+      age: "",
+      email: "",
+      phone: "",
+      avatar: "",
+    },
+    onSubmit: (values) => submitHandle(values),
+  });
 
-let history=useHistory()
+  const submitHandle = (values) => {
+    addPerson(values);
+    history.push("/persons");
+  };
 
-const changeFieldHandle=event=>{
-    setFormData({...formData, [event.target.name]:event.target.value})
-}
+  const errors = use("errors", { errorWithTouched: true });
 
-const submitHandle=event=>{
-    event.preventDefault();
-    if( !formData.fName.trim()||!formData.lName.trim())return 
-    addPerson(formData)
-    history.push('/persons')
-}
-
-return (
+  return (
     <div className="container">
-        <div className="w-50 mx-auto">
-            <form onSubmit={submitHandle}>
-                <div className="form-group">
-                    <label>First Name</label>
-                    <input type="text" className="form-control" name="fName" onChange={changeFieldHandle}/>
-                </div>
-                <div className="form-group">
-                    <label>Last Name</label>
-                    <input type="text" className="form-control" name="lName" onChange={changeFieldHandle}/>
-                </div>
-                <div className="form-group">
-                    <label>Age</label>
-                    <input type="text" className="form-control" name="age" onChange={changeFieldHandle}/>
-                </div>
-                <div className="form-group">
-                    <label>Email</label>
-                    <input type="text" className="form-control" name="email" onChange={changeFieldHandle}/>
-                </div>
-                <div className="form-group">
-                    <label>Phone</label>
-                    <input type="text" className="form-control" name="phone" onChange={changeFieldHandle}/>
-                </div>
-                <div className="form-group mb-2">
-                    <label>Avatar</label>
-                    <input type="text" className="form-control" name="avatar" onChange={changeFieldHandle}/>
-                </div>
-                <div className="form-group">
-                    <button type="submit" className="btn btn-primary w-100">Add</button>
-                </div>
-            </form>
-        </div>
+      <div className="w-50 mx-auto">
+        <form ref={form} noValidate>
+          <InputField type="text" name="fName" id="fName" label="First Name" required error={errors.fName}/>
+          <InputField type="text" name="lName" id="lName" label="Last Name" required error={errors.lName}/>
+          <InputField type="text" name="age" id="age" label="Age" required error={errors.age}/>
+          <InputField type="email" name="email" id="email" label="Email" required error={errors.email}/>
+          <InputField type="text" name="phone" id="phone" label="Phone" required error={errors.phone}/>
+          <InputField type="text" name="avatar" id="avatar" label="Avatar" required error={errors.avatar}/>
+          <div className="form-group mt-3">
+            <button type="submit" className="btn btn-primary w-100">
+              Add
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-)
-
-}
-const mapDipatchToProps=dispatch=>{
-    return{
-        addPerson:person=>dispatch(addNewPerson(person))
-    }
-}
-export default connect(null,mapDipatchToProps)(AddNewPerson)
+  );
+};
+const mapDipatchToProps = (dispatch) => {
+  return {
+    addPerson: (person) => dispatch(addNewPerson(person)),
+  };
+};
+export default connect(null, mapDipatchToProps)(AddNewPerson);
