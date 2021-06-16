@@ -6,7 +6,7 @@ import {
   EDIT_PERSON,
   CHANGE_EDIT,
   CHANGE_DELETE,
-  SET_PERSON_BY_ID,
+  // SET_PERSON_BY_ID,
 } from "../typeList";
 
 // const stateInit = {
@@ -65,13 +65,13 @@ export const PersonsReducer = (state = {}, action) => {
         ...state,
         personDelete: !state.persons.personDelete,
       };
-    case SET_PERSON_BY_ID:
-      const idxById = state.list.findIndex((p) => p.id === action.payload);
-      if (idxById === -1) return { ...state, personById: {} };
-      return {
-        ...state,
-        personById: state.list[idxById],
-      };
+    // case SET_PERSON_BY_ID:
+    //   const idxById = state.list.findIndex((p) => p.id === action.payload);
+    //   if (idxById === -1) return { ...state, personById: {} };
+    //   return {
+    //     ...state,
+    //     personById: state.list[idxById],
+    //   };
     default:
       return state;
   }

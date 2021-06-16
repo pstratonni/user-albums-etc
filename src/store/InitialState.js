@@ -4,7 +4,6 @@ const InitialState = {
     activePerson: null,
     isEdit: false,
     personDelete: false,
-    personById: {},
   },
   posts:{
     list:[],
@@ -13,7 +12,10 @@ const InitialState = {
   albums:{
     list:[],
     addAlbum:false,
-    albumById:{}
+  },
+  photos:{
+    list:[],
+    addPhoto:false,
   }
 };
 export default InitialState

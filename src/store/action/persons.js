@@ -103,22 +103,22 @@ const editPersonToState = (data) => {
   };
 };
 
-export const setPersonById = (personId) => {
-  return (dispatch) => {
-    try {
-      dispatch(setPersonByIdInState(personId));
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
-};
+// export const setPersonById = (personId) => {
+//   return (dispatch) => {
+//     try {
+//       dispatch(setPersonByIdInState(personId));
+//     } catch (e) {
+//       console.log(e.message);
+//     }
+//   };
+// };
 
-const setPersonByIdInState = (personId) => {
-  return {
-    type: SET_PERSON_BY_ID,
-    payload: personId,
-  };
-};
+// const setPersonByIdInState = (personId) => {
+//   return {
+//     type: SET_PERSON_BY_ID,
+//     payload: personId,
+//   };
+// };
 
 // Server emulation
 const getObj = () => {

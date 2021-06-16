@@ -1,12 +1,15 @@
 import React, { useState, useEffect, Fragment } from "react";
+import { connect } from "react-redux";
+import { addNewPhotos } from "../../store/action/photos";
+import { CHANGE_EDIT_PHOTO } from "../../store/typeList";
 
-const AddPhoto = ({ albumId, addNewPhoto, title }) => {
+const AddPhoto = ({ albumId, addNewPhoto, title,isEdit,setIsEdit }) => {
   const [photo, setPhoto] = useState({
     albumId,
     title: "",
     src: "",
   });
-  const [isEdit, setIsEdit] = useState(false);
+  // const [isEdit, setIsEdit] = useState(false);
 
   useEffect(() => {
     const div = isEdit ? document.querySelector(".mod") : null;
@@ -19,7 +22,7 @@ const AddPhoto = ({ albumId, addNewPhoto, title }) => {
 
   const isAddPhoto = (event) => {
     event.preventDefault();
-    setIsEdit(true);
+    setIsEdit();
   };
   const changeHandle = (event) => {
     setPhoto({ ...photo, [event.target.name]: event.target.value });
@@ -28,7 +31,6 @@ const AddPhoto = ({ albumId, addNewPhoto, title }) => {
   const submitHandle = (event) => {
     event.preventDefault();
     addNewPhoto(photo);
-    setIsEdit(false);
     setPhoto({
       albumId,
       title: "",
@@ -67,7 +69,7 @@ const AddPhoto = ({ albumId, addNewPhoto, title }) => {
               </button>
             </div>
           </form>
-          <div className="off" onClick={() => setIsEdit(false)}>
+          <div className="off" onClick={() => setIsEdit()}>
             <p>X</p>
           </div>
         </div>
@@ -85,4 +87,18 @@ const AddPhoto = ({ albumId, addNewPhoto, title }) => {
   </Fragment>)
   
 };
-export default AddPhoto;
+
+const mapStateToProps=state=>{
+  return{
+    isEdit:state.photos.addPhoto,
+  }
+}
+
+const mapDispatchToProps=dispatch=>{
+  return{
+    setIsEdit:()=>dispatch({type:CHANGE_EDIT_PHOTO}),
+    addNewPhoto:data=>dispatch(addNewPhotos(data))
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps) (AddPhoto);

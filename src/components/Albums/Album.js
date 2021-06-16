@@ -1,32 +1,32 @@
-import React, { useContext, useEffect, useState } from "react";
-import { GlobalContext } from "../App";
+import React from "react";
 import { useParams } from "react-router-dom";
 import PhotoCard from "../Photos/PhotoCard";
 import Loading from "../Home/Loading";
-import { useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 
 
 const Album = () => {
-  const { photos} = useContext(GlobalContext);
+  // const { photos} = useContext(GlobalContext);
   const { id } = useParams();
   let idx;
   const album = useSelector((state) => {
     idx = state.albums.list.findIndex((a) => a.id === +id);
     if (idx === -1) return null;
+   
     return state.albums.list[idx];
   });
   
     const person = useSelector((state) => {
-      if(!album.id)return null
+      if(!album)return null
       idx = state.persons.list.findIndex((p) => p.id === album.personId);
-      if (idx === -1) return null;
+      if (idx === -1) return null; 
       return state.persons.list[idx];
     });
- 
-  const [albumPhotos, setAlbumPhotos] = useState(
-    photos.filter((item) => item.albumId === +id)
-  );
-  
+ const albumPhotos=useSelector(state=>{
+   const photos=state.photos.list.filter(ph=>ph.albumId===+id)
+   if(!photos.length)return null
+   return photos
+ })
 
   const renderAlbum = () => {
     if (!album || !person) {
@@ -49,4 +49,5 @@ const Album = () => {
   return renderAlbum();
 };
 
-export default (Album);
+
+export default  (Album);
