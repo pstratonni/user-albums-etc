@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext, Fragment } from "react";
-import { GlobalContext } from "../App";
+import React, { useEffect, Fragment } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "../Home/Loading";
 import AddAlbum from "../Albums/AddAlbum";
@@ -7,7 +6,7 @@ import PersonalAlbum from "../Albums/PersonalAlbums";
 import AddPost from "../Posts/AddPost";
 import PersonalBlog from "../Posts/PersonalBlog";
 import { connect, useSelector } from "react-redux";
-import { deletePerson, setPersonById } from "../../store/action/persons";
+import { deletePerson } from "../../store/action/persons";
 import {
   CHANGE_DELETE,
   CHANGE_EDIT,
@@ -23,8 +22,6 @@ const PersonProfile = ({
   personDelete,
   changeDelete,
   deleteElement,
-  // person,
-  // setLocalPerson,
   addPost,
   setAddPost,
   setAddAlbum,
@@ -36,17 +33,6 @@ const PersonProfile = ({
     if(idx===-1)return null
     return state.persons.list[idx]
   })
-  // const {  addNewAlbum } = useContext(GlobalContext)
-  // const [addAlbum, setAddAlbum] = useState(false);
-  // const [addPost, setAddPost] = useState(false);
-
-  // useEffect(() => {
-  //   setLocalPerson(+id);
-  // }, []);
-
-  // useEffect(() => {
-  //   setLocalPerson(+id);
-  // }, [id, isEdit]);
 
   useEffect(() => {
     const div = addAlbum ? document.querySelector(".mod-album") : null;
@@ -191,16 +177,6 @@ const PersonProfile = ({
     );
   };
 
-  // const addNewAlbumHandle = (formData) => {
-  //   addNewAlbum(formData);
-  //   setAddAlbum(false);
-  // };
-
-  // const addNewPostHandle = (post) => {
-  //   addNewPost(post);
-  //   setAddPost(false);
-  // };
-
   return (
     <section className="container">
       <div className="row">
@@ -216,7 +192,6 @@ const mapStateToProps = (state) => {
     activePerson: state.persons.activePerson,
     isEdit: state.persons.isEdit,
     personDelete: state.persons.personDelete,
-    // person: state.persons.personById,
     addPost: state.posts.addPost,
     addAlbum: state.albums.addAlbum,
   };
@@ -227,7 +202,6 @@ const mapDispatchToProps = (dispatch) => {
     deleteElement: (personId) => dispatch(deletePerson(personId)),
     changeIsEdit: () => dispatch({ type: CHANGE_EDIT }),
     changeDelete: () => dispatch({ type: CHANGE_DELETE }),
-    // setLocalPerson: (id) => dispatch(setPersonById(id)),
     setAddPost: () => dispatch({ type: CHANGE_EDIT_POST }),
     setAddAlbum: () => dispatch({ type: CHANGE_EDIT_ALBUM }),
   };

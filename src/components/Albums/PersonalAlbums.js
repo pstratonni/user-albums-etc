@@ -1,13 +1,10 @@
-import React, { useContext,  } from "react";
-// import { GlobalContext } from "../App";
+import React from "react";
 import AddPhoto from '../Photos/AddPhotos'
 import PhotoCard from '../Photos/PhotoCard'
 import {connect} from 'react-redux'
 
 const PersonalAlbum = ({ personId, activePerson, albums,photos }) => {
-  // const { photos, addNewPhoto  } =
-  //   useContext(GlobalContext);
-
+ 
   const renderAlbum = () => {
     const personalList = albums.filter((album) => album.personId === personId);
     return personalList.map((a) => (

@@ -1,11 +1,9 @@
-import React, { useContext } from "react";
-import { GlobalContext } from "../App";
+import React from "react";
 import AddComment from "../Comments/AddComent";
 import CommentCard from "../Comments/CommentCard";
 import {connect} from 'react-redux'
 
-const PersonalBlog = ({ personId,posts }) => {
-  const { comments } = useContext(GlobalContext);
+const PersonalBlog = ({ personId,posts,comments }) => {
 
   const renderBlog = () => {
     const personalPost = posts.filter((item) => item.personId === personId);
@@ -53,7 +51,8 @@ const PersonalBlog = ({ personId,posts }) => {
 
 const mapStateToProps=state=>{
   return{
-    posts:state.posts.list
+    posts:state.posts.list,
+    comments:state.comments.list
   }
 }
 export default connect(mapStateToProps,null) (PersonalBlog);

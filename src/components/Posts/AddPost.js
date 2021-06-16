@@ -47,7 +47,7 @@ const AddPost=({onFinish,setAddPost,activePerson})=>{
             />
           </div>
           <button type="submit" className="btn btn-danger my-2">Add Post</button>
-          <button className="btn btn-danger my-2 mx-2" onClick={()=>setAddPost()}>Clouse</button>
+          <button className="btn btn-danger my-2 mx-2" onClick={()=>setAddPost()}>Close</button>
         </form>
       );
     };

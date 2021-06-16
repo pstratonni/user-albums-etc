@@ -1,11 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import SelectActivePerson from './Persons/SelectActivePerson'
+import SelectActivePerson from "./Persons/SelectActivePerson";
 
 const Navigation = () => {
-
-  
-
   return (
     <nav className="navbar navbar-expand navbar-dark bg-primary mb-3">
       <div className="container">
@@ -26,8 +23,11 @@ const Navigation = () => {
           <li className="nav-item">
             <NavLink to="/albums">Albums</NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink to="/posts">Blog</NavLink>
+          </li>
         </ul>
-        <SelectActivePerson/>
+        <SelectActivePerson />
       </div>
     </nav>
   );

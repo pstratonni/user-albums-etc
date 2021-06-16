@@ -4,7 +4,6 @@ import {
   DELETE_PERSON,
   FETCH_PERSONS,
   EDIT_PERSON,
-  SET_PERSON_BY_ID,
 } from "../typeList";
 import personsInitial, {
   activePersonId,

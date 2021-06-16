@@ -9,7 +9,6 @@ const AddPhoto = ({ albumId, addNewPhoto, title,isEdit,setIsEdit }) => {
     title: "",
     src: "",
   });
-  // const [isEdit, setIsEdit] = useState(false);
 
   useEffect(() => {
     const div = isEdit ? document.querySelector(".mod") : null;

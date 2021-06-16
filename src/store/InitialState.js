@@ -16,6 +16,10 @@ const InitialState = {
   photos:{
     list:[],
     addPhoto:false,
+  },
+  comments:{
+    list:[],
+    addComment:false
   }
 };
 export default InitialState

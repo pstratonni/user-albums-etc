@@ -1,5 +1,4 @@
 import React from "react";
-// import { GlobalContext } from "../App";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LikeAction from "./LikeAction";
 

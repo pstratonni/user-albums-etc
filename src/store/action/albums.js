@@ -1,5 +1,5 @@
 import albumInitial, { setAlbumsToStorage } from "../../data/album";
-import { ADD_NEW_ALBUM, FETCH_ALBUMS, SET_ALBUM_BYID } from "../typeList";
+import { ADD_NEW_ALBUM, FETCH_ALBUMS } from "../typeList";
 
 export const getAlbums = () => {
   return async (dispatch) => {

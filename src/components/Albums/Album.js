@@ -6,7 +6,7 @@ import {  useSelector } from "react-redux";
 
 
 const Album = () => {
-  // const { photos} = useContext(GlobalContext);
+
   const { id } = useParams();
   let idx;
   const album = useSelector((state) => {

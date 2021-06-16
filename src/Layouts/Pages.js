@@ -28,6 +28,9 @@ const Pages = () => {
       <Route path="/albums/:id">
         <Album />
       </Route>
+      <Route>
+        
+      </Route>
     </Switch>
   );
 };

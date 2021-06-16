@@ -1,10 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { connect } from "react-redux";
-// import { GlobalContext } from "../App";
 import AlbumCard from './AlbumCard'
 
 const Albums = ({albums,photos}) => {
-  // const { photos } = useContext(GlobalContext);
 
   const maxRating=(albumPhotos)=>{
   const arr=[...albumPhotos]
