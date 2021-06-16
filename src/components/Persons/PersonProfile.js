@@ -22,7 +22,7 @@ const PersonProfile = ({
   setLocalPerson,
 }) => {
   const { id } = useParams();
-  const {  addNewAlbum, addNewPost } = useContext(GlobalContext)
+  const {  addNewAlbum } = useContext(GlobalContext)
   const [addAlbum, setAddAlbum] = useState(false);
   const [addPost, setAddPost] = useState(false);
  
@@ -180,7 +180,7 @@ const renderForm=()=>{
         ) : null}
         <PersonalAlbum personId={+id} />
         {addPost ? (
-          <AddPost onFinish={addNewPostHandle} setAddPost={setAddPost} />
+          <AddPost/>
         ) : null}
         <div>
           <PersonalBlog personId={+id} />
@@ -194,10 +194,10 @@ const renderForm=()=>{
     setAddAlbum(false);
   };
 
-  const addNewPostHandle = (post) => {
-    addNewPost(post);
-    setAddPost(false);
-  };
+  // const addNewPostHandle = (post) => {
+  //   addNewPost(post);
+  //   setAddPost(false);
+  // };
 
   return (
     <section className="container">
@@ -214,7 +214,8 @@ const mapStateToProps = (state) => {
     activePerson: state.persons.activePerson,
     isEdit: state.persons.isEdit,
     personDelete: state.persons.personDelete,
-    person:state.persons.personById
+    person:state.persons.personById,
+    addPost:state.posts.addPost
   };
 };
 

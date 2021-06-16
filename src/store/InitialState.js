@@ -7,7 +7,8 @@ const InitialState = {
     personById: {},
   },
   posts:{
-    list:[]
+    list:[],
+    addPost:false
   }
 };
 export default InitialState

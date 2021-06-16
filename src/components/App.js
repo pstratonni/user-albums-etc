@@ -63,16 +63,16 @@ const App = ({initPost}) => {
     setPhotosToStorage(arrLike);
   };
 
-  const [posts, setPosts] = useState(postsInitial);
+  // const [posts, setPosts] = useState(postsInitial);
 
-  const addNewPost = (post) => {
-    const newPosts = [
-      ...posts,
-      { ...post, id: Date.now(), datetime: Date.now() },
-    ];
-    setPosts(newPosts);
-    setPostsToStorage(newPosts);
-  };
+  // const addNewPost = (post) => {
+  //   const newPosts = [
+  //     ...posts,
+  //     { ...post, id: Date.now(), datetime: Date.now() },
+  //   ];
+  //   setPosts(newPosts);
+  //   setPostsToStorage(newPosts);
+  // };
 
   const [comments, setComments] = useState(commentsInitial);
 
@@ -94,8 +94,6 @@ const App = ({initPost}) => {
         photos,
         addNewPhoto,
         addLike,
-        posts,
-        addNewPost,
         comments,
         addNewComments,
         getAlbumById,

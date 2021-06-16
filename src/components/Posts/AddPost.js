@@ -1,5 +1,7 @@
-import React,{useState,useContext} from 'react'
+import React,{useState} from 'react'
 import {connect} from 'react-redux'
+import { addNewPost } from '../../store/action/posts';
+import { CHANGE_EDIT_POST } from '../../store/typeList';
 
 const AddPost=({onFinish,setAddPost,activePerson})=>{
     const[post,setPost]=useState({
@@ -45,7 +47,7 @@ const AddPost=({onFinish,setAddPost,activePerson})=>{
             />
           </div>
           <button type="submit" className="btn btn-danger my-2">Add Post</button>
-          <button className="btn btn-danger my-2 mx-2" onClick={()=>setAddPost(false)}>Clouse</button>
+          <button className="btn btn-danger my-2 mx-2" onClick={()=>setAddPost()}>Clouse</button>
         </form>
       );
     };
@@ -54,5 +56,11 @@ const AddPost=({onFinish,setAddPost,activePerson})=>{
         activePerson:state.persons.activePerson
       }
     }
-    export default connect(mapStateToProps,null)(AddPost);
+    const mapDispatchToProps=dispatch=>{
+      return{
+       onFinish:post=>dispatch(addNewPost(post)),
+       setAddPost:()=>dispatch({type:CHANGE_EDIT_POST})
+      }
+    }
+    export default connect(mapStateToProps,mapDispatchToProps)(AddPost);
     
