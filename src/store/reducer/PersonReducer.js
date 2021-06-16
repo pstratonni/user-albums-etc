@@ -19,7 +19,7 @@ import {
 //   },
 // };
 
-export const PersonsReduser = (state = {}, action) => {
+export const PersonsReducer = (state = {}, action) => {
   switch (action.type) {
     case ADD_NEW_PERSON:
       return {
@@ -57,7 +57,7 @@ export const PersonsReduser = (state = {}, action) => {
     case CHANGE_EDIT:
       return {
         ...state,
-        isEdit: !state.persons.isEdit,
+        isEdit: !state.isEdit,
       };
 
     case CHANGE_DELETE:

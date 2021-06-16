@@ -5,10 +5,6 @@ import { connect } from "react-redux";
 
 const Persons = ({ persons }) => {
 
-
-
- 
-
   const renderPersons = () => {
     if (!persons.length) return <Loading>Add new Persons</Loading>;
     return persons.map((person) => (

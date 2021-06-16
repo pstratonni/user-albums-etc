@@ -1,9 +1,8 @@
 import React, { useContext, useEffect } from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 
 import { NavLink } from "react-router-dom";
 
-import { GlobalContext } from "../App";
 import {changeActivePersonId, getPerson} from '../../store/action/persons'
 
 const SelectActivePerson = ({
@@ -12,7 +11,10 @@ const SelectActivePerson = ({
   getPersonsObj,
   changeActivePerson,
 }) => {
-  const {getPersonById}=useContext(GlobalContext)
+   const personProFile = useSelector(state=>{
+     const idx=state.persons.list.findIndex(p=>p.id===activePerson)
+     return state.persons.list[idx]
+   })
   useEffect(() => {
     getPersonsObj();
   }, []);
@@ -26,7 +28,7 @@ const SelectActivePerson = ({
   };
 
     const activPersonData = (name) => {
-      const personProFile = getPersonById(activePerson);
+     
       return personProFile[name];
     };
 

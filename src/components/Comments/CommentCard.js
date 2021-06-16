@@ -1,8 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
-const CommentCard = ({ personId, body, getPersonById, dateTime }) => {
-  const personName = (id) => {
-    const person = getPersonById(id);
+const CommentCard = ({ personId, body, dateTime }) => {
+const person=useSelector(state=>{
+  const idx=state.persons.list.findIndex(p=>p.id===personId)
+  if(idx===-1)return null
+  return state.persons.list[idx]
+})
+  const personName = () => {
     if(person)return person.lName + " " + person.fName[0];
     return 'Deleted Person'
   };
@@ -20,7 +25,7 @@ const CommentCard = ({ personId, body, getPersonById, dateTime }) => {
 
   return (
     <div className="card-body">
-      <h5 className="card-title">{personName(personId)}</h5>
+      <h5 className="card-title">{personName()}</h5>
       <p>{renderTime()}</p>
       <p className="card-text">{body}</p>
     </div>

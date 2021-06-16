@@ -9,6 +9,11 @@ const InitialState = {
   posts:{
     list:[],
     addPost:false
+  },
+  albums:{
+    list:[],
+    addAlbum:false,
+    albumById:{}
   }
 };
 export default InitialState

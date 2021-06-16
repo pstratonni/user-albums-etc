@@ -1,47 +1,33 @@
 import React, { useEffect, useState } from "react";
-import personInitial from "../data/person";
-import albumInitial, { setAlbumsToStorage } from "../data/album";
+// import personInitial from "../data/person";
+// import albumInitial, { setAlbumsToStorage } from "../data/album";
 import photosInitial, { setPhotosToStorage } from "../data/photos";
-import postsInitial, { setPostsToStorage } from "../data/posts";
+// import postsInitial, { setPostsToStorage } from "../data/posts";
 import commentsInitial, { setCommentsToStorage } from "../data/comments";
 import Navigation from "./Navigation";
 import Pages from "../Layouts/Pages";
 import { connect } from "react-redux";
 import { getPost } from "../store/action/posts";
+import { getAlbums } from "../store/action/albums";
 
 export const GlobalContext = React.createContext();
 
-const App = ({initPost}) => {
+const App = ({initPost,initAlbum}) => {
 
   useEffect(()=>{
     initPost()
+    initAlbum()
   },[])
 
-  const [persons, setPerson] = useState(personInitial);
+  // const [persons, setPerson] = useState(personInitial);
  
 
-  const getPersonById = (id) => {
-    setPerson(personInitial)
-    const idx = persons.findIndex((person) => person.id === +id);
-    if (idx === -1) return null;
-    return persons[idx];
-  };
-
-  const [albums, setAlbum] = useState(albumInitial);
-
-  const addNewAlbum = (album) => {
-    const newAlbum = [...albums, { ...album, id: Date.now() }];
-    setAlbum(newAlbum);
-    setAlbumsToStorage(newAlbum);
-  };
-
-  const getAlbumById = (id) => {
-    const idx = albums.findIndex((album) => album.id === id);
-    if (idx === -1) {
-      return null;
-    }
-    return albums[idx];
-  };
+  // const getPersonById = (id) => {
+  //   setPerson(personInitial)
+  //   const idx = persons.findIndex((person) => person.id === +id);
+  //   if (idx === -1) return null;
+  //   return persons[idx];
+  // };
 
   const [photos, setPhotos] = useState(photosInitial);
 
@@ -88,15 +74,12 @@ const App = ({initPost}) => {
   return (
     <GlobalContext.Provider
       value={{
-        getPersonById,
-        albums,
-        addNewAlbum,
+        // getPersonById,
         photos,
         addNewPhoto,
         addLike,
         comments,
         addNewComments,
-        getAlbumById,
       }}
     >
       <Navigation />
@@ -107,7 +90,8 @@ const App = ({initPost}) => {
 
 const mapDispatchToProps=dispatch=>{
   return{
-    initPost:()=>dispatch(getPost())
+    initPost:()=>dispatch(getPost()),
+    initAlbum:()=>dispatch(getAlbums())
   }
 }
 export default connect(null,mapDispatchToProps) (App);

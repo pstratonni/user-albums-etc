@@ -1,6 +1,6 @@
 import { ADD_NEW_POST, CHANGE_EDIT_POST, FETCH_POSTS } from "../typeList";
 
-export const PostsReduser = (state = {}, action) => {
+export const PostsReducer = (state = {}, action) => {
   switch (action.type) {
     case FETCH_POSTS:
       return { ...state, ...action.payload };

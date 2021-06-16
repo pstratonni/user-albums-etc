@@ -6,9 +6,14 @@ import AddAlbum from "../Albums/AddAlbum";
 import PersonalAlbum from "../Albums/PersonalAlbums";
 import AddPost from "../Posts/AddPost";
 import PersonalBlog from "../Posts/PersonalBlog";
-import { connect } from "react-redux";
-import { deletePerson,  setPersonById } from "../../store/action/persons";
-import { CHANGE_DELETE, CHANGE_EDIT } from "../../store/typeList";
+import { connect, useSelector } from "react-redux";
+import { deletePerson, setPersonById } from "../../store/action/persons";
+import {
+  CHANGE_DELETE,
+  CHANGE_EDIT,
+  CHANGE_EDIT_ALBUM,
+  CHANGE_EDIT_POST,
+} from "../../store/typeList";
 import EditPersonForm from "./EditPersonForm";
 
 const PersonProfile = ({
@@ -18,22 +23,30 @@ const PersonProfile = ({
   personDelete,
   changeDelete,
   deleteElement,
-  person,
-  setLocalPerson,
+  // person,
+  // setLocalPerson,
+  addPost,
+  setAddPost,
+  setAddAlbum,
+  addAlbum,
 }) => {
   const { id } = useParams();
-  const {  addNewAlbum } = useContext(GlobalContext)
-  const [addAlbum, setAddAlbum] = useState(false);
-  const [addPost, setAddPost] = useState(false);
- 
+  const person= useSelector(state => {
+    const idx=state.persons.list.findIndex(p=>p.id===+id)
+    if(idx===-1)return null
+    return state.persons.list[idx]
+  })
+  // const {  addNewAlbum } = useContext(GlobalContext)
+  // const [addAlbum, setAddAlbum] = useState(false);
+  // const [addPost, setAddPost] = useState(false);
 
-  useEffect(() => {
-   setLocalPerson(+id)
-  }, []);
+  // useEffect(() => {
+  //   setLocalPerson(+id);
+  // }, []);
 
-  useEffect(() => {
-    setLocalPerson(+id)
-  }, [id,isEdit]);
+  // useEffect(() => {
+  //   setLocalPerson(+id);
+  // }, [id, isEdit]);
 
   useEffect(() => {
     const div = addAlbum ? document.querySelector(".mod-album") : null;
@@ -100,7 +113,6 @@ const PersonProfile = ({
           Edit
         </button>
         <button onClick={deleteHandle} className="col-6 btn btn-danger my-2">
-         
           Delete me
         </button>
         <button
@@ -126,12 +138,12 @@ const PersonProfile = ({
 
   const addAlbumButtonHandel = (event) => {
     event.preventDefault();
-    setAddAlbum(true);
+    setAddAlbum();
   };
 
   const addPostButtonHandle = (event) => {
     event.preventDefault();
-    setAddPost(true);
+    setAddPost();
   };
 
   const deleteHandle = (event) => {
@@ -139,11 +151,9 @@ const PersonProfile = ({
     changeDelete();
   };
 
-const renderForm=()=>{
-  return(
-    <EditPersonForm person={person}/>
-  )
-}
+  const renderForm = () => {
+    return <EditPersonForm person={person} />;
+  };
 
   const deletePersonHandle = (event) => {
     event.preventDefault();
@@ -171,17 +181,9 @@ const renderForm=()=>{
   const renderPersonInfo = () => {
     return (
       <Fragment>
-        {addAlbum ? (
-          <AddAlbum
-            onFinish={addNewAlbumHandle}
-            setAddAlbum={setAddAlbum}
-            addAlbum={addAlbum}
-          />
-        ) : null}
+        {addAlbum ? <AddAlbum /> : null}
         <PersonalAlbum personId={+id} />
-        {addPost ? (
-          <AddPost/>
-        ) : null}
+        {addPost ? <AddPost /> : null}
         <div>
           <PersonalBlog personId={+id} />
         </div>
@@ -189,10 +191,10 @@ const renderForm=()=>{
     );
   };
 
-  const addNewAlbumHandle = (formData) => {
-    addNewAlbum(formData);
-    setAddAlbum(false);
-  };
+  // const addNewAlbumHandle = (formData) => {
+  //   addNewAlbum(formData);
+  //   setAddAlbum(false);
+  // };
 
   // const addNewPostHandle = (post) => {
   //   addNewPost(post);
@@ -214,18 +216,20 @@ const mapStateToProps = (state) => {
     activePerson: state.persons.activePerson,
     isEdit: state.persons.isEdit,
     personDelete: state.persons.personDelete,
-    person:state.persons.personById,
-    addPost:state.posts.addPost
+    // person: state.persons.personById,
+    addPost: state.posts.addPost,
+    addAlbum: state.albums.addAlbum,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteElement: (personId) => dispatch(deletePerson(personId)),
-    
-    changeIsEdit: () => dispatch({ type: CHANGE_EDIT}),
-    changeDelete: () => dispatch({ type: CHANGE_DELETE}),
-    setLocalPerson: id=>dispatch(setPersonById(id))
+    changeIsEdit: () => dispatch({ type: CHANGE_EDIT }),
+    changeDelete: () => dispatch({ type: CHANGE_DELETE }),
+    // setLocalPerson: (id) => dispatch(setPersonById(id)),
+    setAddPost: () => dispatch({ type: CHANGE_EDIT_POST }),
+    setAddAlbum: () => dispatch({ type: CHANGE_EDIT_ALBUM }),
   };
 };
 

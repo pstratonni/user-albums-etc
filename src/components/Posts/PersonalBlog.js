@@ -5,7 +5,7 @@ import CommentCard from "../Comments/CommentCard";
 import {connect} from 'react-redux'
 
 const PersonalBlog = ({ personId,posts }) => {
-  const { comments, getPersonById } = useContext(GlobalContext);
+  const { comments } = useContext(GlobalContext);
 
   const renderBlog = () => {
     const personalPost = posts.filter((item) => item.personId === personId);
@@ -41,7 +41,6 @@ const PersonalBlog = ({ personId,posts }) => {
             dateTime={c.datetime}
               personId={c.personId}
               body={c.body}
-              getPersonById={getPersonById}
             />
           </div>
         ))}

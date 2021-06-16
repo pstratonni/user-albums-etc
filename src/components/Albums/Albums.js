@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
+import { connect } from "react-redux";
 import { GlobalContext } from "../App";
 import AlbumCard from './AlbumCard'
 
-const Albums = () => {
-  const { albums, photos } = useContext(GlobalContext);
+const Albums = ({albums}) => {
+  const { photos } = useContext(GlobalContext);
 
   const maxRating=(albumPhotos)=>{
   const arr=[...albumPhotos]
@@ -34,4 +35,9 @@ const Albums = () => {
       <div className='container'>{renderAlbums()}</div>
   )
 };
-export default Albums;
+const mapStateToProps=state=>{
+  return{
+    albums:state.albums.list
+  }
+}
+export default connect(mapStateToProps,null) (Albums);

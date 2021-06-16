@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { addNewAlbum } from "../../store/action/albums";
+import { CHANGE_EDIT_ALBUM } from "../../store/typeList";
 
 const AddAlbum = ({ onFinish, setAddAlbum, activePerson }) => {
   const [formData, setFormData] = useState({
@@ -35,7 +37,7 @@ const AddAlbum = ({ onFinish, setAddAlbum, activePerson }) => {
             </button>
           </div>
         </form>
-        <div className="off" onClick={() => setAddAlbum(false)}>
+        <div className="off" onClick={() => setAddAlbum()}>
           <p>X</p>
         </div>
       </div>
@@ -45,6 +47,13 @@ const AddAlbum = ({ onFinish, setAddAlbum, activePerson }) => {
 const mapStateToProps = (state) => {
   return {
     activePerson: state.persons.activePerson,
+    
   };
 };
-export default connect(mapStateToProps)(AddAlbum);
+const mapDispatchToProps=dispatch=>{
+  return{
+    setAddAlbum:()=>dispatch({type:CHANGE_EDIT_ALBUM}),
+    onFinish:data=>dispatch(addNewAlbum(data)),
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(AddAlbum);
