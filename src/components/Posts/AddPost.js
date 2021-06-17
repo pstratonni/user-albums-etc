@@ -1,66 +1,63 @@
-import React,{useState} from 'react'
-import {connect} from 'react-redux'
-import { addNewPost } from '../../store/action/posts';
-import { CHANGE_EDIT_POST } from '../../store/typeList';
+import React from "react";
+import { useForm } from "react-cool-form";
+import { connect } from "react-redux";
+import { addNewPost } from "../../store/action/posts";
+import { CHANGE_EDIT_POST } from "../../store/typeList";
+import InputField from "../FormComponents/InputField";
 
-const AddPost=({onFinish,setAddPost,activePerson})=>{
-    const[post,setPost]=useState({
-        personId:activePerson,
-        title:'',
-        short:'',
-        body:''
-    })
-    const changeFieldHandle=event=>{
-        setPost({...post,[event.target.name]:event.target.value})
-    }
+const AddPost = ({ onFinish, setAddPost, activePerson }) => {
 
+  const { form, use } = useForm({
+    defaultValues: { title: "", short: "", body: "", personId: activePerson },
+    onSubmit: (values) => onFinish(values),
+  });
 
-    return (
-        <form
-          onSubmit={() => {
-            onFinish(post);
-          }}
-        >
-          <div className="form-group">
-            <label>Title</label>
-            <input
-              type="text"
-              className="form-control"
-              name="title"
-              onChange={changeFieldHandle}
-            />
-          </div>
-          <div className="form-group">
-            <label>Short Text</label>
-            <textarea
-              className="form-control"
-              name="short"
-              onChange={changeFieldHandle}
-            />
-          </div>
-          <div className="form-group">
-            <label>Post text</label>
-            <textarea
-              className="form-control"
-              name="body"
-              onChange={changeFieldHandle}
-            />
-          </div>
-          <button type="submit" className="btn btn-danger my-2">Add Post</button>
-          <button className="btn btn-danger my-2 mx-2" onClick={()=>setAddPost()}>Close</button>
-        </form>
-      );
-    };
-    const mapStateToProps=state=>{
-      return{
-        activePerson:state.persons.activePerson
-      }
-    }
-    const mapDispatchToProps=dispatch=>{
-      return{
-       onFinish:post=>dispatch(addNewPost(post)),
-       setAddPost:()=>dispatch({type:CHANGE_EDIT_POST})
-      }
-    }
-    export default connect(mapStateToProps,mapDispatchToProps)(AddPost);
-    
+  const errors = use("errors", { errorWithTouched: true });
+
+  return (
+    <form ref={form} noValidate>
+      <InputField
+        type="text"
+        name="title"
+        id="title"
+        label="Title"
+        required
+        error={errors.title}
+      />
+      <InputField
+        type="text"
+        name="short"
+        id="short"
+        label="Short Text"
+        required
+        error={errors.short}
+      />
+      <InputField
+        type="text"
+        name="body"
+        id="body"
+        label="Post text"
+        required
+        error={errors.title}
+      />
+      <button type="submit" className="btn btn-danger my-2">
+        Add Post
+      </button>
+      <button className="btn btn-danger my-2 mx-2" onClick={() => setAddPost()}>
+        Close
+      </button>
+    </form>
+  );
+};
+const mapStateToProps = (state) => {
+  return {
+    activePerson: state.persons.activePerson,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onFinish: (post) => dispatch(addNewPost(post)),
+    setAddPost: () => dispatch({ type: CHANGE_EDIT_POST }),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(AddPost);

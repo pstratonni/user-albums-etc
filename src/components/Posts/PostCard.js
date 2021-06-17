@@ -12,7 +12,7 @@ const PostCard=({post})=>{
     })
     return(
         <div className='col-6 col-sm-4 col-md-3'>
-            <div className='card cur-pointer' 
+            <div className='card cur-pointer my-2' 
             // onClick={clickHandle}
             >
                 <div className='card-body'>
