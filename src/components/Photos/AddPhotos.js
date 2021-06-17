@@ -2,12 +2,12 @@ import React, { useState, useEffect, Fragment } from "react";
 import { useForm } from "react-cool-form";
 import { connect } from "react-redux";
 import { addNewPhotos } from "../../store/action/photos";
-import { CHANGE_EDIT_PHOTO } from "../../store/typeList";
+
 import InputField from "../FormComponents/InputField";
 
-const AddPhoto = ({ albumId, addNewPhoto, title, isEdit, setIsEdit }) => {
+const AddPhoto = ({ albumId, addNewPhoto, title }) => {
  
-
+const [isEdit,setIsEdit]=useState(false)
   useEffect(() => {
     const div = isEdit ? document.querySelector(".mod") : null;
     if (div) {
@@ -16,11 +16,6 @@ const AddPhoto = ({ albumId, addNewPhoto, title, isEdit, setIsEdit }) => {
     const body = document.querySelector("body");
     body.style.overflow = isEdit ? "hidden" : "auto";
   }, [isEdit]);
-
-  const isAddPhoto = (event) => {
-    event.preventDefault();
-    setIsEdit();
-  };
 
   const { form, use } = useForm({
     defaultValues: {
@@ -35,6 +30,7 @@ const AddPhoto = ({ albumId, addNewPhoto, title, isEdit, setIsEdit }) => {
 
   const submitHandle = (photo) => {
     addNewPhoto(photo);
+    setIsEdit(false)
    
   };
   const renderForm = () => {
@@ -51,7 +47,7 @@ const AddPhoto = ({ albumId, addNewPhoto, title, isEdit, setIsEdit }) => {
               </button>
             </div>
           </form>
-          <div className="off" onClick={isAddPhoto}>
+          <div className="off" onClick={()=>setIsEdit(false)}>
             <p>X</p>
           </div>
         </div>
@@ -62,7 +58,7 @@ const AddPhoto = ({ albumId, addNewPhoto, title, isEdit, setIsEdit }) => {
     <Fragment>
       {isEdit ? renderForm() : null}
       <div className="my-2">
-        <button className="btn btn-info" onClick={isAddPhoto}>
+        <button className="btn btn-info" onClick={()=>setIsEdit(true)}>
           Add Photo
         </button>
       </div>
@@ -70,17 +66,12 @@ const AddPhoto = ({ albumId, addNewPhoto, title, isEdit, setIsEdit }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    isEdit: state.photos.addPhoto,
-  };
-};
+
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setIsEdit: () => dispatch({ type: CHANGE_EDIT_PHOTO }),
     addNewPhoto: (data) => dispatch(addNewPhotos(data)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddPhoto);
+export default connect(null, mapDispatchToProps)(AddPhoto);

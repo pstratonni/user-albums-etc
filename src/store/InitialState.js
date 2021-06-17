@@ -16,6 +16,7 @@ const InitialState = {
   photos:{
     list:[],
     addPhoto:false,
+    delPhoto:false
   },
   comments:{
     list:[],

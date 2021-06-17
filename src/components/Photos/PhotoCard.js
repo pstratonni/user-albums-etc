@@ -1,14 +1,16 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LikeAction from "./LikeAction";
+import DeletePhoto from "./DeletePhoto";
 
 const PhotoCard = ({ photo, personId }) => {
-  return(
-      <div className="col-6 col-sm-4 col-md-3">
-        <div className="card my-2">
-          <img src={photo.src} alt={photo.title} />
-          <div className="card-body">
-            <p className="card-title">{photo.title}</p>
+  return (
+    <div className="col-6 col-sm-4 col-md-3">
+      <div className="card my-2">
+        <img src={photo.src} alt={photo.title} />
+        <div className="card-body">
+          <p className="card-title">{photo.title}</p>
+          <div className='dfjb'>
             <p className="card-text df">
               <LikeAction
                 icons="thumbs-up"
@@ -36,10 +38,13 @@ const PhotoCard = ({ photo, personId }) => {
                 {photo.like - photo.dislike}
               </span>
             </p>
+            <DeletePhoto personId={personId} photoId={photo.id} />
+            
           </div>
         </div>
       </div>
-    ) ;
+    </div>
+  );
 };
 
-export default (PhotoCard);
+export default PhotoCard;

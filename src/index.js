@@ -12,11 +12,12 @@ import {
   faThumbsDown,
   faHeart,
   faHeartBroken,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 
 
 
-library.add(faThumbsUp, faThumbsDown, faHeart, faHeartBroken);
+library.add(faThumbsUp, faThumbsDown, faHeart, faHeartBroken, faTrash);
 
 ReactDOM.render(
   <Provider store={store}>

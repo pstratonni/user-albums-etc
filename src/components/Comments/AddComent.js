@@ -10,9 +10,8 @@ const AddComment = ({
   postId,
   activePerson,
   addNewComments,
-  addComment,
-  setAddComment,
 }) => {
+  const [addComment,setAddComment]=useState(false)
   const { form, use } = useForm({
     defaultValues: {
       postId,
@@ -29,6 +28,7 @@ const AddComment = ({
   const onSubmit = (comment) => {
     comment.personId=activePerson
     addNewComments(comment);
+    setAddComment(false)
   };
 
   const renderForm = () => {
@@ -45,7 +45,7 @@ const AddComment = ({
         <div className="form-group">
           <button
             className="btn btn-danger w-25"
-            onClick={() => setAddComment()}
+            onClick={() => setAddComment(false)}
           >
             Close
           </button>
@@ -63,7 +63,7 @@ const AddComment = ({
     ) : (
       <button
         className="btn btn-danger w-25 my-2"
-        onClick={() => setAddComment()}
+        onClick={() => setAddComment(true)}
       >
         Add new comment
       </button>
@@ -75,13 +75,11 @@ const AddComment = ({
 const mapStateToProps = (state) => {
   return {
     activePerson: state.persons.activePerson,
-    addComment: state.comments.addComment,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     addNewComments: (data) => dispatch(addNewComment(data)),
-    setAddComment: () => dispatch({ type: CHANGE_EDIT_COMMENTS }),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AddComment);
