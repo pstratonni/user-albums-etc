@@ -47,12 +47,6 @@ const Post = () => {
     );
   };
 
-  const turnChevron=()=>{
-   const span=document.querySelector('#turn')
-   span.classList.toggle('turn')
-    setCommentsRead(!commentsRead)
-  }
-
   const renderPost = () => {
     if (!post || !person) return <Loading />;
     return (
@@ -64,9 +58,13 @@ const Post = () => {
           <span>Comments: {comments.length}</span>
           <span
             className="mx-2 cur-pointer "
-            onClick={turnChevron}
+            onClick={() => setCommentsRead(!commentsRead)}
           >
-            <FontAwesomeIcon icon="chevron-right" className="green" id='turn'/>
+            {commentsRead ? (
+              <FontAwesomeIcon icon="level-up-alt" className="green" />
+            ) : (
+              <FontAwesomeIcon icon="level-down-alt" className="green" />
+            )}
           </span>
         </h4>
         {commentsRead ? renderComments() : null}
