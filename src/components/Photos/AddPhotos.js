@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState, useEffect, Fragment } from "react";
 import { useForm } from "react-cool-form";
 import { connect } from "react-redux";
@@ -48,7 +49,7 @@ const [isEdit,setIsEdit]=useState(false)
             </div>
           </form>
           <div className="off" onClick={()=>setIsEdit(false)}>
-            <p>X</p>
+            <p><FontAwesomeIcon icon='times-circle' className="red"/></p>
           </div>
         </div>
       </div>

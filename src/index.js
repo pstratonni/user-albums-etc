@@ -17,6 +17,7 @@ import {
   faChevronRight,
   faLevelDownAlt,
   faLevelUpAlt,
+  faTimesCircle,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -28,7 +29,8 @@ library.add(
   faPlusCircle,
   faChevronRight,
   faLevelDownAlt,
-  faLevelUpAlt
+  faLevelUpAlt,
+  faTimesCircle
 );
 
 ReactDOM.render(

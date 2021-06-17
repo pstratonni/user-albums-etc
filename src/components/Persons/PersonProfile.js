@@ -14,6 +14,7 @@ import {
   CHANGE_EDIT_POST,
 } from "../../store/typeList";
 import EditPersonForm from "./EditPersonForm";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const PersonProfile = ({
   activePerson,
@@ -157,7 +158,7 @@ const PersonProfile = ({
             Delete me
           </a>
           <div className="off" onClick={() => changeDelete()}>
-            <p>X</p>
+            <p><FontAwesomeIcon icon='times-circle' className="red"/></p>
           </div>
         </div>
       </div>

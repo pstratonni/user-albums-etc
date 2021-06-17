@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import {editPerson} from '../../store/action/persons'
@@ -90,7 +91,7 @@ const [formData, setFormData]=useState(person)
                 </form>
               </div>
               <div className="off" onClick={() => changeIsEdit()}>
-                <p>X</p>
+                <p><FontAwesomeIcon icon='times-circle' className="red"/></p>
               </div>
             </div>
           </div>

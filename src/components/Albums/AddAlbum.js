@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
 import { useForm } from "react-cool-form";
 import { connect } from "react-redux";
 import { addNewAlbum } from "../../store/action/albums";
@@ -6,19 +7,6 @@ import { CHANGE_EDIT_ALBUM } from "../../store/typeList";
 import InputField from "../FormComponents/InputField";
 
 const AddAlbum = ({ onFinish, setAddAlbum, activePerson }) => {
-  // const [formData, setFormData] = useState({
-  //   personId: activePerson,
-  //   title: "",
-  // });
-
-  // const changeHandle = (event) => {
-  //   setFormData({ ...formData, [event.target.name]: event.target.value });
-  // };
-
-  // const onSubmit = (event) => {
-  //   event.preventDefault();
-  //   onFinish(formData);
-  // };
   const { form, use } = useForm({
     defaultValues: {
       personId: activePerson,
@@ -46,7 +34,7 @@ const AddAlbum = ({ onFinish, setAddAlbum, activePerson }) => {
           </div>
         </form>
         <div className="off" onClick={() => setAddAlbum()}>
-          <p>X</p>
+          <p><FontAwesomeIcon icon='times-circle' className="red"/></p>
         </div>
       </div>
     </div>

@@ -76,7 +76,7 @@ select {
   height: 20px;
   font-weight: bold;
   border-radius: 50%;
-  background-color: red;
+
   display: flex;
   justify-content: center;
   align-items: center;

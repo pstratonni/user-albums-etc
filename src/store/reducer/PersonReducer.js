@@ -63,7 +63,7 @@ export const PersonsReducer = (state = {}, action) => {
     case CHANGE_DELETE:
       return {
         ...state,
-        personDelete: !state.persons.personDelete,
+        personDelete: !state.personDelete,
       };
     // case SET_PERSON_BY_ID:
     //   const idxById = state.list.findIndex((p) => p.id === action.payload);
