@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-cool-form";
 // import { GlobalContext } from "../App";
@@ -6,29 +7,24 @@ import { addNewComment } from "../../store/action/comments";
 import { CHANGE_EDIT_COMMENTS } from "../../store/typeList";
 import InputField from "../FormComponents/InputField";
 
-const AddComment = ({
-  postId,
-  activePerson,
-  addNewComments,
-}) => {
-  const [addComment,setAddComment]=useState(false)
+const AddComment = ({ postId, activePerson, addNewComments }) => {
+  const [addComment, setAddComment] = useState(false);
   const { form, use } = useForm({
     defaultValues: {
       postId,
       body: "",
     },
     onSubmit: (values) => onSubmit(values),
-    onStateChange:(values)=>{
-      values.personId=activePerson
-    }
+    onStateChange: (values) => {
+      values.personId = activePerson;
+    },
   });
   const errors = use("errors", { errorWithTouched: true });
 
-
   const onSubmit = (comment) => {
-    comment.personId=activePerson
+    comment.personId = activePerson;
     addNewComments(comment);
-    setAddComment(false)
+    setAddComment(false);
   };
 
   const renderForm = () => {
@@ -60,13 +56,13 @@ const AddComment = ({
   const renderButtons = () => {
     return addComment ? (
       renderForm()
-    ) : (
-      <button
-        className="btn btn-danger w-25 my-2"
-        onClick={() => setAddComment(true)}
-      >
-        Add new comment
-      </button>
+    ) : (<button className="btn btn-outline-success" onClick={() => setAddComment(true)}>
+      Add
+       <FontAwesomeIcon
+        icon="plus-circle"
+        className="mx-2"        
+      /></button>
+     
     );
   };
 

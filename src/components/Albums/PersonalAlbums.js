@@ -23,7 +23,7 @@ const PersonalAlbum = ({ personId, activePerson, albums,photos }) => {
 
   const renderPhotosByAlbum = (albumId) => {
     const albumPhotos = photos.filter((photo) => photo.albumId === albumId);
-    return albumPhotos.map((photo) => {console.log(photo.id);
+    return albumPhotos.map((photo) => {
       return(
       <PhotoCard
         key={photo.id}

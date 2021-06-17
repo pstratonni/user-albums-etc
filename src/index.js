@@ -13,11 +13,13 @@ import {
   faHeart,
   faHeartBroken,
   faTrash,
+  faPlusCircle,
+faChevronRight
 } from "@fortawesome/free-solid-svg-icons";
 
 
 
-library.add(faThumbsUp, faThumbsDown, faHeart, faHeartBroken, faTrash);
+library.add(faThumbsUp, faThumbsDown, faHeart, faHeartBroken, faTrash,faPlusCircle,faChevronRight);
 
 ReactDOM.render(
   <Provider store={store}>

@@ -104,3 +104,8 @@ select {
   height: 50px;
   border-radius: 50%;
 }
+
+.turn{
+ 
+  transform: rotate(90deg);
+}

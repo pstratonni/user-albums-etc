@@ -7,6 +7,7 @@ import PersonProfile from "../components/Persons/PersonProfile";
 import Albums from "../components/Albums/Albums";
 import Album from "../components/Albums/Album";
 import Blog from "../components/Posts/Blog";
+import Post from "../components/Posts/Post";
 
 const Pages = () => {
   return (
@@ -31,6 +32,9 @@ const Pages = () => {
       </Route>
       <Route exact path="/posts">
         <Blog />
+      </Route>
+      <Route path="/posts/:id">
+        <Post />
       </Route>
     </Switch>
   );
