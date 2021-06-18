@@ -1,109 +1,98 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, {useState} from 'react'
-import {connect} from 'react-redux'
-import {editPerson} from '../../store/action/persons'
-import { CHANGE_EDIT } from '../../store/typeList'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import { useForm } from "react-cool-form";
+import { connect } from "react-redux";
+import { editPerson } from "../../store/action/persons";
+import { CHANGE_EDIT } from "../../store/typeList";
+import InputField from "../FormComponents/InputField";
 
-const EditPersonForm=({person, editElement,changeIsEdit})=>{
+const EditPersonForm = ({ person, editElement, changeIsEdit }) => {
+  const { form, use } = useForm({
+    defaultValues: {...person},
+    onSubmit: (values) => submitFormHandle(values),
+  });
 
-const [formData, setFormData]=useState(person)
+  const errors = use("errors", { errorWithTouched: true });
 
-    const changeFieldHandle = (event) => {
-        setFormData({ ...formData, [event.target.name]: event.target.value });
-      };
+  const submitFormHandle = (formData) => {
+    editElement(formData);
+  };
 
-      const submitFormHandle = (event) => {
-        event.preventDefault();
-        editElement(formData);
-      };
-
-
-        return (
-          <div className="mod-form">
-            <div className="mod-1-form bg-light">
-              <div className="w-100 ">
-                <form onSubmit={submitFormHandle} className="my-2">
-                  <div className="form-group">
-                    <label>First Name</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={formData.fName}
-                      name="fName"
-                      onChange={changeFieldHandle}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Last Name</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={formData.lName}
-                      name="lName"
-                      onChange={changeFieldHandle}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Age</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={formData.age}
-                      name="age"
-                      onChange={changeFieldHandle}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Email</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={formData.email}
-                      name="email"
-                      onChange={changeFieldHandle}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Phone</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={formData.phone}
-                      name="phone"
-                      onChange={changeFieldHandle}
-                    />
-                  </div>
-                  <div className="form-group mb-2">
-                    <label>Avatar</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={person.avatar}
-                      name="avatar"
-                      onChange={changeFieldHandle}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <button type="submit" className="btn btn-danger w-100">
-                      Save Changes
-                    </button>
-                  </div>
-                </form>
-              </div>
-              <div className="off" onClick={() => changeIsEdit()}>
-                <p><FontAwesomeIcon icon='times-circle' className="red"/></p>
-              </div>
+  return (
+    <div className="mod-form">
+      <div className="mod-1-form bg-light">
+        <div className="w-100 ">
+          <form ref={form} className="my-2" noValidate>
+            <InputField
+              type="text"
+              id="fName"
+              name="fName"
+              label="First Name"
+              required
+              error={errors.fName}
+            />
+            <InputField
+              type="text"
+              id="lName"
+              name="lName"
+              label="Last Name"
+              required
+              error={errors.lName}
+            />
+            <InputField
+              type="text"
+              id="age"
+              name="age"
+              label="Age"
+              required
+              error={errors.age}
+            />
+            <InputField
+              type="email"
+              id="email"
+              name="email"
+              label="Email"
+              required
+              error={errors.email}
+            />
+            <InputField
+              type="text"
+              id="phone"
+              name="phone"
+              label="Phone"
+              required
+              error={errors.phone}
+            />
+            <InputField
+              type="text"
+              id="avatar"
+              name="avatar"
+              label="Avatar"
+              required
+              error={errors.avatar}
+            />
+            <div className="form-group">
+              <button type="submit" className="btn btn-danger w-100">
+                Save Changes
+              </button>
             </div>
-          </div>
-        );
-      
-}
+          </form>
+        </div>
+        <div className="off" onClick={() => changeIsEdit()}>
+          <p>
+            <FontAwesomeIcon icon="times-circle" className="red" />
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-const mapDispatchToProps=dispatch=>{
-return {
-    changeIsEdit: () => dispatch({ type: CHANGE_EDIT}),
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeIsEdit: () => dispatch({ type: CHANGE_EDIT }),
     editElement: (data) => dispatch(editPerson(data)),
-}
-}
+  };
+};
 
-export default connect(null, mapDispatchToProps)(EditPersonForm)
+export default connect(null, mapDispatchToProps)(EditPersonForm);

@@ -46,7 +46,7 @@ export const PersonsReducer = (state = {}, action) => {
       };
     case EDIT_PERSON:
       const idxEdit = state.list.findIndex((p) => p.id === action.payload.id);
-      if (idxEdit === -1) return state;
+      if (idxEdit === -1) return {...state,isEdit:false};
       const _arrEdit = [...state.list];
       _arrEdit.splice(idxEdit, 1, action.payload);
       return {

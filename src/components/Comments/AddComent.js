@@ -1,10 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-cool-form";
-// import { GlobalContext } from "../App";
 import { connect } from "react-redux";
 import { addNewComment } from "../../store/action/comments";
-import { CHANGE_EDIT_COMMENTS } from "../../store/typeList";
 import InputField from "../FormComponents/InputField";
 
 const AddComment = ({ postId, activePerson, addNewComments }) => {
