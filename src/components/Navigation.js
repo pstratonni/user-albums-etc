@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import SelectActivePerson from "./Persons/SelectActivePerson";
@@ -9,22 +10,34 @@ const Navigation = () => {
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
           <li className="nav-item">
             <NavLink exact={true} to="/">
-              Home
+            <h4><FontAwesomeIcon
+        icon="laptop-house"        
+      /></h4>
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink exact={true} to="/persons">
+              <FontAwesomeIcon icon="users" className="mx-2" />
               All Persons
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/persons/add">Add Person</NavLink>
+            <NavLink to="/persons/add">
+              <FontAwesomeIcon icon="user-plus" className="mx-2" />
+              Add Person
+            </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/albums">Albums</NavLink>
+            <NavLink to="/albums"><FontAwesomeIcon
+        icon="images"
+        className="mx-2"        
+      />Albums</NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/posts">Blog</NavLink>
+            <NavLink to="/posts">
+              <FontAwesomeIcon icon="blog" className="mx-2" />
+              Blog
+            </NavLink>
           </li>
         </ul>
         <SelectActivePerson />

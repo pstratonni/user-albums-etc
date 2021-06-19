@@ -23,7 +23,12 @@ import {
   faFolder,
   faUserEdit,
   faUserTimes,
-  faFolderOpen
+  faFolderOpen,
+  faUsers,
+  faUserPlus,
+  faBlog,
+  faImages,
+  faLaptopHouse
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -42,7 +47,12 @@ library.add(
   faFolder,
   faUserEdit,
   faUserTimes,
-  faFolderOpen
+  faFolderOpen,
+  faUsers,
+  faUserPlus,
+  faBlog,
+  faImages,
+  faLaptopHouse
 );
 
 ReactDOM.render(
