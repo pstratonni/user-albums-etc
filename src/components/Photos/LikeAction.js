@@ -26,12 +26,15 @@ const LikeAction = ({
     />
   );
 };
+
 const mapStateToProps = (state) => {
   return {
     activePerson: state.persons.activePerson,
   };
 };
+
 const mapDispatchToProps = (dispatch) => {
   return { addLike: (photoId, alfa) => dispatch(addLikes(photoId, alfa)) };
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(LikeAction);

@@ -29,27 +29,30 @@ const PersonProfile = ({
   addAlbum,
 }) => {
   const { id } = useParams();
-  const person= useSelector(state => {
-    const idx=state.persons.list.findIndex(p=>p.id===+id)
-    if(idx===-1)return null
-    return state.persons.list[idx]
-  })
+  const person = useSelector((state) => {
+    const idx = state.persons.list.findIndex((p) => p.id === +id);
+    if (idx === -1) return null;
+    return state.persons.list[idx];
+  });
 
   useEffect(() => {
     const div = addAlbum ? document.querySelector(".mod-album") : null;
     if (div) {
       div.style.top = `${document.documentElement.scrollTop}px`;
     }
+
     const div1 = isEdit ? document.querySelector(".mod-form") : null;
     if (div1) {
       div1.style.top = `${document.documentElement.scrollTop}px`;
     }
+
     const divDelete = personDelete
       ? document.querySelector(".mod-delete")
       : null;
     if (divDelete) {
       divDelete.style.top = `${document.documentElement.scrollTop}px`;
     }
+
     const body = document.querySelector("body");
     body.style.overflow = addAlbum || isEdit ? "hidden" : "auto";
   }, [addAlbum, isEdit, personDelete]);
@@ -98,21 +101,26 @@ const PersonProfile = ({
           className="col-6 btn btn-success my-2"
         >
           Edit
+          <FontAwesomeIcon icon="user-edit" className="mx-2" />
         </button>
         <button onClick={deleteHandle} className="col-6 btn btn-danger my-2">
           Delete me
+          <FontAwesomeIcon icon="user-times" className="mx-2" />
         </button>
         <button
           onClick={addAlbumButtonHandel}
           className="w-100 btn btn-info mb-2"
         >
-          Add Album
+          <span className="text-light">
+            Add Album
+            <FontAwesomeIcon icon="folder" className="mx-2" />
+          </span>
         </button>
         <button
           onClick={addPostButtonHandle}
           className="w-100 btn btn-danger mb-2"
         >
-          Add Post
+          Add Post <FontAwesomeIcon icon="plus-circle" className="mx-2" />
         </button>
       </div>
     );
@@ -158,7 +166,9 @@ const PersonProfile = ({
             Delete me
           </a>
           <div className="off" onClick={() => changeDelete()}>
-            <p><FontAwesomeIcon icon='times-circle' className="red"/></p>
+            <p>
+              <FontAwesomeIcon icon="times-circle" className="red" />
+            </p>
           </div>
         </div>
       </div>

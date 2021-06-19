@@ -18,6 +18,12 @@ import {
   faLevelDownAlt,
   faLevelUpAlt,
   faTimesCircle,
+  faComments,
+  faImage,
+  faFolder,
+  faUserEdit,
+  faUserTimes,
+  faFolderOpen
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -30,7 +36,13 @@ library.add(
   faChevronRight,
   faLevelDownAlt,
   faLevelUpAlt,
-  faTimesCircle
+  faTimesCircle,
+  faComments,
+  faImage,
+  faFolder,
+  faUserEdit,
+  faUserTimes,
+  faFolderOpen
 );
 
 ReactDOM.render(

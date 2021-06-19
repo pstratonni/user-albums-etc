@@ -57,7 +57,7 @@ const AddComment = ({ postId, activePerson, addNewComments }) => {
     ) : (<button className="btn btn-outline-success" onClick={() => setAddComment(true)}>
       Add
        <FontAwesomeIcon
-        icon="plus-circle"
+        icon="comments"
         className="mx-2"        
       /></button>
      

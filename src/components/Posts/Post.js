@@ -53,7 +53,6 @@ const Post = () => {
       <Fragment>
         <h4>{post.title}</h4>
         <p>{post.body}</p>
-
         <h4>
           <span>Comments: {comments.length}</span>
           <span
@@ -72,6 +71,8 @@ const Post = () => {
       </Fragment>
     );
   };
+
   return <div className="container">{renderPost()}</div>;
 };
+
 export default Post;

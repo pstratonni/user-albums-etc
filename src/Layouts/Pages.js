@@ -24,13 +24,13 @@ const Pages = () => {
       <Route path="/persons/:id">
         <PersonProfile />
       </Route>
-      <Route exact path="/albums">
+      <Route exact={true} path="/albums">
         <Albums />
       </Route>
       <Route path="/albums/:id">
         <Album />
       </Route>
-      <Route exact path="/posts">
+      <Route exact={true} path="/posts">
         <Blog />
       </Route>
       <Route path="/posts/:id">
@@ -39,4 +39,5 @@ const Pages = () => {
     </Switch>
   );
 };
+
 export default Pages;

@@ -49,15 +49,18 @@ const AddPost = ({ onFinish, setAddPost, activePerson }) => {
     </form>
   );
 };
+
 const mapStateToProps = (state) => {
   return {
     activePerson: state.persons.activePerson,
   };
 };
+
 const mapDispatchToProps = (dispatch) => {
   return {
     onFinish: (post) => dispatch(addNewPost(post)),
     setAddPost: () => dispatch({ type: CHANGE_EDIT_POST }),
   };
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(AddPost);

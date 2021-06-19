@@ -1,8 +1,6 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect, useSelector } from "react-redux";
-
 import { NavLink } from "react-router-dom";
-
 import {changeActivePersonId, getPerson} from '../../store/action/persons'
 
 const SelectActivePerson = ({
@@ -28,7 +26,6 @@ const SelectActivePerson = ({
   };
 
     const activPersonData = (name) => {
-     
       return personProFile[name];
     };
 
@@ -52,7 +49,6 @@ const SelectActivePerson = ({
         <select
           onChange={changeSelectValue}
           defaultValue={activePerson || null}
-          className=""
         >
           <option>Choose a person</option>
           {persons.map((person) => (

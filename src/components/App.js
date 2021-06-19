@@ -7,7 +7,6 @@ import { getAlbums } from "../store/action/albums";
 import { getPhotos } from "../store/action/photos";
 import { getComments } from "../store/action/comments";
 
-
 const App = ({ initPost, initAlbum, initPhotos, initComments }) => {
   useEffect(() => {
     initPost();
@@ -32,4 +31,5 @@ const mapDispatchToProps = (dispatch) => {
     initComments: () => dispatch(getComments()),
   };
 };
+
 export default connect(null, mapDispatchToProps)(App);
