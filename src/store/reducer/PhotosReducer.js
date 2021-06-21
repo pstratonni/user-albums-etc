@@ -34,7 +34,9 @@ export const PhotosReducer = (state = {}, action) => {
         list: _arr,
       };
     case DELETE_PHOTO:
-      idx = state.list.findIndex((photo) => photo.id === action.payload.id);
+
+      idx = state.list.findIndex((photo) => photo.id === action.payload);
+      console.log(idx);
       _arr = [...state.list];
       _arr.splice(idx, 1);
       return {

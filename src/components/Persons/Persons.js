@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 const Persons = ({ persons }) => {
   const renderPersons = () => {
-    if (!persons.length) return <Loading>Add new Persons</Loading>;
+    if (!persons.length) return <h3>Add new Persons</h3>;
     return persons.map((person) => (
       <PersonCard key={person.id} person={person} />
     ));

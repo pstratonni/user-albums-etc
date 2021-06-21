@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import LikeAction from "./LikeAction";
 import DeletePhoto from "./DeletePhoto";
+import LikeAction from "./LikeAction";
 
 const PhotoCard = ({ photo, personId }) => {
   return (
@@ -10,24 +10,12 @@ const PhotoCard = ({ photo, personId }) => {
         <img src={photo.src} alt={photo.title} />
         <div className="card-body">
           <p className="card-title">{photo.title}</p>
-          <div className='dfjb'>
+          <div className="dfjb">
             <p className="card-text df">
               <LikeAction
-                icons="thumbs-up"
                 personId={personId}
-                classGreenRed="mx-2 green"
-                photoId={photo.id}
-                alfa="like"
+                photo={photo}
               />
-              <span className="green">{photo.like}</span>
-              <LikeAction
-                icons="thumbs-down"
-                personId={personId}
-                classGreenRed="mx-2 red"
-                photoId={photo.id}
-                alfa="dislike"
-              />
-              <span className="red">{photo.dislike}</span>
               <FontAwesomeIcon
                 icon={photo.like - photo.dislike < 0 ? "heart-broken" : "heart"}
                 className="red mx-2"
@@ -39,7 +27,6 @@ const PhotoCard = ({ photo, personId }) => {
               </span>
             </p>
             <DeletePhoto personId={personId} photoId={photo.id} />
-            
           </div>
         </div>
       </div>

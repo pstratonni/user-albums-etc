@@ -109,3 +109,11 @@ select {
  
   transform: rotate(90deg);
 }
+
+.l-red{
+  color: rgba(255, 0, 0, 0.5);
+}
+
+.l-green{
+  color: rgba(0, 128, 0, 0.5);
+}
